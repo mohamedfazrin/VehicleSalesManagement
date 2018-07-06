@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="eff5ff4e-3d0a-4c1c-9df2-2bc9993f5c21">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="376"/>
+	<parameter name="b" class="java.lang.String"/>
+	<parameter name="my" class="java.lang.String"/>
+	<parameter name="mo" class="java.lang.String"/>
+	<parameter name="engC" class="java.lang.String"/>
+	<parameter name="milea" class="java.lang.String"/>
+	<parameter name="price" class="java.lang.String"/>
+	<parameter name="type" class="java.lang.String"/>
+	<parameter name="status" class="java.lang.String"/>
+	<parameter name="eBrand" class="java.lang.String"/>
+	<parameter name="eModelYear" class="java.lang.String"/>
+	<parameter name="eModel" class="java.lang.String"/>
+	<parameter name="eEngC" class="java.lang.String"/>
+	<parameter name="eMileage" class="java.lang.String"/>
+	<parameter name="ePrice" class="java.lang.String"/>
+	<parameter name="eType" class="java.lang.String"/>
+	<parameter name="eStatus" class="java.lang.String"/>
+	<parameter name="img" class="java.lang.String"/>
+	<parameter name="img2" class="java.lang.String"/>
+	<parameter name="sp" class="java.lang.String"/>
+	<parameter name="ep" class="java.lang.String"/>
+	<parameter name="minb" class="java.lang.String"/>
+	<parameter name="des" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select count(*)as reg from exchangeveh]]>
+	</queryString>
+	<field name="reg" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="348" height="132" uuid="7c85b313-9087-4df8-af22-61ca7c1b5dae"/>
+				<imageExpression><![CDATA["C:\\Users\\it17153232\\Desktop\\Vehicle Sale Project\\Project\\VehicleSalesManagement\\src\\icons\\photo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="131" y="32" width="424" height="100" uuid="7d123041-3f0d-4131-8af8-4b6fd65003c2"/>
+				<textElement>
+					<font fontName="Adobe Caslon Pro Bold" size="30" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Exchanging Vehicle Summary Report]]></text>
+			</staticText>
+			<image>
+				<reportElement x="492" y="81" width="63" height="51" uuid="85f98810-95ef-4903-8161-ff6f700ea537"/>
+				<imageExpression><![CDATA["G:\\Java Institute Studies\\Projects Icons For Netbeans\\ICONS\\Icons xxxxxx\\16\\white\\48x48\\chart_bar.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="650" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="17" width="555" height="1" uuid="19496bf8-27ad-434c-b5a6-151749840c0d"/>
+			</line>
+			<line>
+				<reportElement x="279" y="18" width="1" height="378" uuid="102de445-4efa-4767-91b5-be3e019f46bb"/>
+			</line>
+			<staticText>
+				<reportElement x="68" y="30" width="152" height="20" uuid="c4540a0d-2ec3-4c8b-b293-c9dce4c7930c"/>
+				<textElement>
+					<font size="14" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[System Vehicle Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="30" width="180" height="20" uuid="064ed1af-fdc8-4dd3-8581-1b8a87531c0b"/>
+				<textElement>
+					<font size="14" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Exchanging Vehicle Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="69" width="121" height="20" uuid="65626ec6-fa98-4670-b3b2-afd8c6cb30b6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Brand      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="90" width="121" height="20" uuid="a5caa907-9bc7-40c1-b684-df1121c6ab33"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Model Year]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="111" width="121" height="20" uuid="b39c0f5f-4807-4604-86ab-6b0da1ef4882"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Model]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="131" width="121" height="20" uuid="6dbe98d2-9692-409b-8940-b07dccd36a0c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Engine Capacity (CC)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="153" width="121" height="23" uuid="230739c1-6f1a-45dc-9e56-c23d2952c1a4"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Milleage (km)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="173" width="121" height="20" uuid="6787b42a-a928-4322-9b0b-0e2353cd7b60"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Price (Rs)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="192" width="121" height="24" uuid="b92bb10a-9be8-4275-9c37-aa895b78af96"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="216" width="121" height="28" uuid="de63da22-162a-428c-b797-bf29ce1818a7"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="162" y="69" width="100" height="20" forecolor="#6666FF" uuid="cbe555c3-93b8-47a8-aacb-803055466f23"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{b}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="90" width="100" height="20" forecolor="#6666FF" uuid="261ead64-985d-4161-a11a-4eb9aca2aee1"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{my}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="111" width="100" height="20" forecolor="#6666FF" uuid="9f1c70ee-4b6c-40a6-9292-dbf49a7c42d3"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="131" width="100" height="20" forecolor="#6666FF" uuid="142b9acc-20a0-4ac1-819e-3b3132c93372"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{engC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="153" width="100" height="20" forecolor="#6666FF" uuid="ae907445-abf3-4d54-bb7a-de1910e23a21"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{milea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="173" width="100" height="20" forecolor="#6666FF" uuid="18287328-1394-424e-952f-e3050c1ecd06"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="192" width="100" height="24" forecolor="#6666FF" uuid="7659e9b8-9a16-4f0c-abd5-f56a86b4d1f9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="216" width="100" height="28" forecolor="#6666FF" uuid="75552396-8845-433e-ba00-ba8f7512aefb"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{status}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="295" y="70" width="72" height="20" uuid="6fb0d81a-9f48-45ea-9323-6f1c9047aef0"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Brand]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="91" width="72" height="20" uuid="46766965-395d-43e6-b8d1-964bfb534a84"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Model Year]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="112" width="72" height="20" uuid="dce6ee8d-69f6-466a-9126-41ec461d42fc"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Model]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="133" width="100" height="20" uuid="149ab430-9904-4133-aa53-c7a18673bc7a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Engine Capacity(CC)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="154" width="72" height="20" uuid="9408140c-6468-4b8d-8ef9-c7029dda037c"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Milleage (Km)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="174" width="100" height="20" uuid="fa84d6cd-c5cb-4d41-98b7-4f2768e248d4"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Price (Rs)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="194" width="100" height="20" uuid="445987f4-4b96-4a01-9c31-3260d2a30420"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="70" width="100" height="20" forecolor="#3399FF" uuid="cf03d450-170f-468d-ae21-52db0e16e246"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{eBrand}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="91" width="100" height="20" forecolor="#3399FF" uuid="fa37c40e-4064-4a5b-85d5-f0aacd6a9611"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{eModelYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="112" width="100" height="20" forecolor="#3399FF" uuid="1d0612f1-ca66-4834-89dd-197812aeadf7"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{eModel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="133" width="100" height="20" forecolor="#3399FF" uuid="82a87bc1-1175-41e7-b5cf-a544809cdef5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{eEngC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="154" width="100" height="20" forecolor="#3399FF" uuid="c2c484a1-6d60-430a-b927-3c89cc61a65d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{eMileage}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="174" width="100" height="20" forecolor="#3399FF" uuid="8bc039c2-90ed-4726-984a-cb9c7896f04a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ePrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="194" width="100" height="20" forecolor="#3399FF" uuid="a2e876ee-5dc7-4687-9105-3f2592fb9f24"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{eType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="295" y="216" width="100" height="20" uuid="e28f4b1b-f869-4091-904f-2439872e616f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="216" width="100" height="20" forecolor="#3399FF" uuid="5ecc522a-b31e-44cc-8450-6f35082db228"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{eStatus}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="555" y="18" width="1" height="378" uuid="81635b85-0b0f-4730-b251-598d9269a52a"/>
+			</line>
+			<line>
+				<reportElement x="0" y="18" width="1" height="378" uuid="91a277ee-9318-4886-92ae-430771f3a3b3"/>
+			</line>
+			<image>
+				<reportElement x="10" y="249" width="252" height="143" uuid="deed33d0-96af-44a5-b1d3-ed24eb683af5"/>
+				<imageExpression><![CDATA[$P{img}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="295" y="248" width="245" height="143" uuid="933eabae-709d-47dd-8569-db069bae6a63"/>
+				<imageExpression><![CDATA[$P{img2}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="1" y="396" width="554" height="1" uuid="3d08a636-6d30-4491-ad23-9e07bb5973f9"/>
+			</line>
+			<staticText>
+				<reportElement x="16" y="414" width="121" height="20" forecolor="#FF3333" uuid="b36022d4-9e5a-471a-9464-68efba6965cf"/>
+				<textElement>
+					<font size="14" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Payement Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="449" width="100" height="20" uuid="36e03857-45f4-4252-bd8d-5d8b93de41b1"/>
+				<text><![CDATA[Selling Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="469" width="100" height="24" uuid="2a98e752-b9bb-450a-979b-41235bf4c76b"/>
+				<text><![CDATA[Exchanging Price]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="449" width="100" height="20" uuid="4e72edec-788e-4f55-9976-d91530656819"/>
+				<textFieldExpression><![CDATA[$P{sp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="473" width="100" height="20" uuid="425bc559-2e2d-4b39-baa7-f3220dec58f3"/>
+				<textFieldExpression><![CDATA[$P{ep}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="493" width="100" height="28" uuid="350da995-c66e-4ae6-bd53-ddf945107d15"/>
+				<text><![CDATA[Balance]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="493" width="100" height="28" uuid="88e2fe61-0385-43a8-a7c0-2ac4df9b6dcf"/>
+				<textFieldExpression><![CDATA[$P{minb}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="521" width="99" height="21" uuid="207eafad-5880-4c01-886d-6d28e15521b3"/>
+				<text><![CDATA[Payment Description]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="521" width="164" height="21" uuid="f1e28aed-738f-470c-89cf-59de6a723076"/>
+				<textFieldExpression><![CDATA[$P{des}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="555" y="397" width="1" height="185" uuid="9b72a275-4c91-4bef-af58-92f30a7ca702"/>
+			</line>
+			<line>
+				<reportElement x="1" y="582" width="555" height="1" uuid="86795d13-2415-464f-bbfa-441988bcfa15"/>
+			</line>
+			<line>
+				<reportElement x="1" y="397" width="1" height="185" uuid="ee53014f-f965-4519-b1a1-370c23b91d1d"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
