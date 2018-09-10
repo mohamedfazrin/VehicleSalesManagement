@@ -12,6 +12,7 @@ import de.javasoft.plaf.synthetica.SyntheticaBlackMoonLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaClassyLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaGreenDreamLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaSimple2DLookAndFeel;
 import java.io.FileNotFoundException;
 import java.sql.ResultSet;
 import java.util.logging.Level;
@@ -146,6 +147,62 @@ public class Login extends javax.swing.JFrame {
         String pw = new String(jPasswordField1.getPassword());
 
        // jButton1.setVisible(false);
+      
+       String type="null";
+       
+        try {
+            
+           ResultSet rs= Database.getData("select user from login where password='"+jPasswordField1.getText()+"'");
+            while(rs.next()){
+            
+                type=rs.getString("user");
+                
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        
+        
+        
+        if(type.equalsIgnoreCase("User")){
+            
+            try {
+                Database.setData("update login set status='1' where user='"+type+"'");
+                
+            } catch (Exception e) {
+            }
+         
+            
+        
+        }else if(type.equalsIgnoreCase("Admin")){
+        
+                 try {
+                Database.setData("update login set status='1' where user='"+type+"'");
+                
+            } catch (Exception e) {
+            }
+        
+        }else if(type.equalsIgnoreCase("Devaloper")){
+                 try {
+                Database.setData("update login set status='1' where user='"+type+"'");
+                
+            } catch (Exception e) {
+            }
+        
+        }else{
+           JOptionPane.showMessageDialog(null,"Your Not registerd to System");
+        
+        }
+       
+        //System.out.println(type);
+       
+       
+       
+       
         try {
             ResultSet rs = Database.getData("SELECT uName,password FROM login WHERE uName='" + usname + "' && password='" + pw + "'");
 
@@ -222,7 +279,7 @@ public class Login extends javax.swing.JFrame {
         
         try {
 
-            UIManager.setLookAndFeel(new SyntheticaBlackEyeLookAndFeel());
+            UIManager.setLookAndFeel(new SyntheticaSimple2DLookAndFeel());
 
         } catch (Exception e) {
             e.printStackTrace();

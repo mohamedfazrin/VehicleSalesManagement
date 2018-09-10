@@ -1227,7 +1227,7 @@ public class Exchange_vehicle extends javax.swing.JPanel {
             ResultSet rs = Database.getData("select * from customer");
             while (rs.next()) {
 
-                jComboBox5.addItem(rs.getString(2));
+                jComboBox5.addItem(rs.getString("NIC"));
 
             }
 

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="11998b39-6744-44d8-bb35-096691c35be4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="393fdb88-a208-4116-a091-bfb2d51fd04e"/>
+	<subDataset name="Table" uuid="6fdfdcc3-27f9-4927-bb37-c5e1f4972a6f">
+		<queryString language="SQL">
+			<![CDATA[SELECT * FROM bodypratselling WHERE invoice_id=(SELECT max(invoice_id) FROM bodypratselling);]]>
+		</queryString>
+		<field name="brand" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="model" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="quantity" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="total" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<group name="brand">
+			<groupExpression><![CDATA[$F{brand}]]></groupExpression>
+		</group>
+		<group name="model">
+			<groupExpression><![CDATA[$F{model}]]></groupExpression>
+		</group>
+		<group name="quantity">
+			<groupExpression><![CDATA[$F{quantity}]]></groupExpression>
+		</group>
+		<group name="total">
+			<groupExpression><![CDATA[$F{total}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="table2" uuid="4b770e78-0cf8-4f7e-9b67-9af3f7d3fab5">
+		<queryString language="SQL">
+			<![CDATA[select * from bodymodel]]>
+		</queryString>
+		<field name="m_id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="bid" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="mName" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="barcode" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<group name="m_id">
+			<groupExpression><![CDATA[$F{m_id}]]></groupExpression>
+		</group>
+		<group name="bid">
+			<groupExpression><![CDATA[$F{bid}]]></groupExpression>
+		</group>
+		<group name="mName">
+			<groupExpression><![CDATA[$F{mName}]]></groupExpression>
+		</group>
+		<group name="barcode">
+			<groupExpression><![CDATA[$F{barcode}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="Title" class="java.lang.String"/>
+	<field name="COLUMN_0" class="java.lang.String"/>
+	<field name="COLUMN_1" class="java.lang.String"/>
+	<field name="COLUMN_2" class="java.lang.String"/>
+	<field name="COLUMN_3" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="165" splitType="Stretch">
+			<staticText>
+				<reportElement x="205" y="0" width="350" height="123" uuid="1793657b-8d95-467f-9656-f6d34ee7a396"/>
+				<textElement>
+					<font size="80"/>
+				</textElement>
+				<text><![CDATA[INVOICE]]></text>
+			</staticText>
+			<image>
+				<reportElement x="12" y="0" width="193" height="155" uuid="95cda616-0aab-4d9e-b90d-ea71fb77797c"/>
+				<imageExpression><![CDATA["C:\\Users\\it17153232\\Desktop\\Vehicle Sale Project\\Project\\VehicleSalesManagement\\src\\icons\\photo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="205" y="127" width="350" height="32" uuid="fd17c904-f318-41ea-ad1e-d278997e95b5"/>
+				<textElement>
+					<font fontName="Adobe Garamond Pro Bold" size="24"/>
+				</textElement>
+				<text><![CDATA[    Wayamba Wheels Enterprises]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<elementGroup/>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="251" splitType="Stretch">
+			<textField pattern="">
+				<reportElement style="table" positionType="FixRelativeToBottom" x="354" y="39" width="100" height="23" uuid="cb7c90a1-bb3a-4188-8d88-58014ebfa02e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="table" x="354" y="19" width="100" height="20" uuid="58c88719-1d69-49fd-852e-b2115ddbc396"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement style="table" positionType="FixRelativeToBottom" x="254" y="39" width="100" height="23" uuid="ac4ca43f-7f57-4075-8e2a-72c61647c59e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font isItalic="false"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="table" x="254" y="19" width="100" height="20" uuid="7a7bc5e8-262b-4b5a-b80e-90543ef3bf82"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement style="table" positionType="FixRelativeToBottom" x="154" y="39" width="100" height="23" uuid="929c767f-1561-469f-ade3-580692a34f96"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="table" x="154" y="19" width="100" height="20" uuid="01e32d72-afc8-41d8-a2db-34238085b1f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Model]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement style="table" positionType="FixRelativeToBottom" x="54" y="39" width="100" height="23" uuid="f6cd4098-28e4-4d91-b822-6a14399ab525"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font isStrikeThrough="false"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_0}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="table" x="54" y="19" width="100" height="20" uuid="fcfea149-8a00-4b69-9ebb-8ac83c30339b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Brand]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

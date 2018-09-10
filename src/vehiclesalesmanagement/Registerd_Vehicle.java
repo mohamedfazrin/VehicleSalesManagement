@@ -5,17 +5,22 @@
  */
 package vehiclesalesmanagement;
 
+import com.placeholder.PlaceHolder;
 import java.awt.Image;
 import java.io.File;
 import java.sql.ResultSet;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.design.JRDesignExpression;
 
 /**
  *
@@ -26,19 +31,38 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
     /**
      * Creates new form Registerd_Vehicle
      */
+    private int dis[] = new int[10];
+    String dis_Name[] = new String[10];
+
     public Registerd_Vehicle() {
 
         initComponents();
 
         //jProgressBar1.setVisible(false);
         comboreda();
-        typecombo();
-        tablesearch();
-        jTextField12.setEnabled(false);
-        jTextField13.setEnabled(false);
-        jTextField14.setEnabled(false);
-         jLabel26.setVisible(false);
+        
 
+        jTextField12.setEnabled(false);
+        jTextField9.setEnabled(false);
+        jTextField2.setEnabled(false);
+        jTextField14.setEnabled(false);
+        jLabel26.setVisible(false);
+        dis_Name[0] = "DVD Player";
+        dis_Name[1] = "Alloy Wheel";
+        dis_Name[2] = "AC";
+        dis_Name[3] = "R camera";
+        dis_Name[4] = "TV";
+        dis_Name[5] = "Air Bag";
+        dis_Name[6] = "Multifunction";
+        dis_Name[7] = "Petrol";
+        dis_Name[8] = "Diesel";
+        dis_Name[9] = "Electric";
+
+        for (int i = 0; i < 10; i++) {
+            dis[i] = 0;
+        }
+
+        PlaceHolder ob = new PlaceHolder(jTextField8, "search Brand/Model/Reg Number/Eng and chassis Num");
     }
     static String path = "";
 
@@ -63,7 +87,6 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -73,11 +96,11 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel13 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -85,27 +108,39 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
         jLabel23 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jTextField14 = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        jLabel26 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel15 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jTextField8 = new javax.swing.JTextField();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBox8 = new javax.swing.JCheckBox();
+        jCheckBox9 = new javax.swing.JCheckBox();
+        jCheckBox10 = new javax.swing.JCheckBox();
         jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        jTextField10 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
+        jButton8 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -117,101 +152,134 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 153, 153), null));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Brand");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 70, 34));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 70, 34));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Model Year");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 51, 110, 37));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 110, 37));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Model");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 94, 70, 41));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 70, 41));
 
-        jLabel4.setText("Engine Capacity (CC)");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 141, 110, 41));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("Engine Cap (CC)");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, 41));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Milleage (Km)");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 188, 110, 45));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 110, 45));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Chassis Number");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 239, 110, 43));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 110, 43));
 
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Brand" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 11, 140, 34));
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 140, 40));
 
+        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 51, 212, 37));
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 212, 40));
 
+        jComboBox2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Model" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 94, 140, 41));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 141, 212, 41));
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 193, 212, 40));
+        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 130, 40));
 
+        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField3KeyReleased(evt);
+            }
+        });
+        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 212, 40));
+
+        jTextField4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 239, 212, 43));
+        jPanel2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 212, 40));
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Registerd Number");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 288, 110, 39));
-        jPanel2.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 288, 212, 39));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 110, 39));
 
+        jTextField5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jPanel2.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 212, 40));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Engine Number");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 11, 108, 34));
-        jPanel2.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 11, 227, 34));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 108, 34));
 
+        jTextField6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jPanel2.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 212, 40));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Selling Price");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 51, 108, 37));
-        jPanel2.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 51, 227, 37));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 100, 40));
 
+        jTextField7.setEditable(false);
+        jTextField7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jPanel2.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 212, 40));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("Type");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 94, 108, 41));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 60, 70, 41));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Type" }));
-        jPanel2.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 94, 150, 41));
-
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setText("Description");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 141, 108, 41));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, 130, 30));
 
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 141, 227, 54));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 380, 120));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/monitor-sidebar.png"))); // NOI18N
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 204, 30, -1));
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 30, -1));
+
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/we.gif"))); // NOI18N
+        jPanel2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, -1, 40));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 51, 51));
-        jButton1.setText("        Upload");
+        jButton1.setText("  Upload Image");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 110, 30));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 300, 40));
 
         jLabel12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 203, 227, 140));
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 300, 150));
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_item.png"))); // NOI18N
         jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 30, 40));
@@ -221,83 +289,199 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 10, 40, 40));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 40, 40));
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_item.png"))); // NOI18N
-        jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 30, -1));
+        jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 114, 20, 30));
 
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 93, 40, 40));
-        jPanel2.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 60, 30));
-        jPanel2.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 60, 30));
-        jPanel2.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 70, 30));
+        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 40, 40));
 
-        jLabel21.setFont(new java.awt.Font("Orator Std", 0, 14)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel21.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 110, 40));
+        jTextField12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jPanel2.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 60, 40));
 
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Refresh.png"))); // NOI18N
-        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 30, 40));
-
-        jButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(0, 204, 204));
-        jButton7.setText("         Refresh");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jTextField2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 110, 40));
+        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 70, 40));
 
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/we.gif"))); // NOI18N
-        jPanel2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 120, 30));
+        jTextField14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jPanel2.add(jTextField14, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 212, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 3, 710, 370));
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel21.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 440, 110, 40));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 153, 153), null));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Refresh.png"))); // NOI18N
+        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 440, 40, 40));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add.png"))); // NOI18N
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 40, 30));
+        jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBox1.setText("DVD Player");
+        jCheckBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox1MouseClicked(evt);
+            }
+        });
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(721, 70, -1, 20));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBox2.setText("Alloy Wheel");
+        jCheckBox2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox2MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(821, 70, 100, -1));
+
+        jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBox3.setText("AC");
+        jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox3MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(919, 70, 40, -1));
+
+        jCheckBox4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBox4.setText("R Camera");
+        jCheckBox4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox4MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jCheckBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(723, 100, 80, -1));
+
+        jCheckBox5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBox5.setText("TV");
+        jCheckBox5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox5MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jCheckBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 130, 40, 20));
+
+        jCheckBox6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBox6.setText("Air Bag");
+        jCheckBox6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox6MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jCheckBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(999, 70, 70, 20));
+
+        jCheckBox7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBox7.setText("Multifunction");
+        jCheckBox7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox7MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jCheckBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 130, 110, -1));
+
+        jCheckBox8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBox8.setText("Petrol");
+        jCheckBox8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox8MouseClicked(evt);
+            }
+        });
+        jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox8ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jCheckBox8, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 100, 60, -1));
+
+        jCheckBox9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBox9.setText("Diesel");
+        jCheckBox9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox9MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jCheckBox9, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, -1, -1));
+
+        jCheckBox10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBox10.setText("Electric");
+        jCheckBox10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBox10MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jCheckBox10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1001, 100, -1, -1));
+
+        jTextField9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jPanel2.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 212, 40));
+
+        jLabel18.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 60, 380, 100));
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel19.setText("Cost Price(Rs)");
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 100, 40));
+
+        jTextField10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jTextField10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField10KeyReleased(evt);
+            }
+        });
+        jPanel2.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 212, 40));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Trash.gif"))); // NOI18N
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 360, 40, 30));
+
+        jButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jButton2.setText("Add Vehicle");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 13, 225, 45));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 200, 70));
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Trash.gif"))); // NOI18N
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 40, 30));
-
-        jButton3.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        jButton3.setText("Delete Vehicle");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 69, 225, 44));
-
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/arrow-repeat-once.png"))); // NOI18N
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 40, 50));
-
-        jButton4.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jButton4.setText("Update Vehicle");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 124, 225, 44));
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 340, 220, 70));
 
+        jButton3.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jButton3.setText("Delete Vehicle");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 340, 220, 70));
+
+        jLabel27.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabel27.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 710, 100));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add.png"))); // NOI18N
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, 30, 30));
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/arrow-repeat-once.png"))); // NOI18N
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 350, 40, 50));
+
+        jTextField8.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
         jTextField8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextField8MouseClicked(evt);
@@ -314,74 +498,56 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
                 jTextField8KeyReleased(evt);
             }
         });
-        jPanel3.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 190, 160, 30));
+        jPanel2.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, 440, 40));
 
-        jTextField9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField9MouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTextField9MouseReleased(evt);
-            }
-        });
-        jTextField9.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField9KeyReleased(evt);
+        jButton8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton8.setText("           View All");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
             }
         });
-        jPanel3.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 160, 30));
-
-        jTextField10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField10MouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTextField10MouseReleased(evt);
-            }
-        });
-        jTextField10.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField10KeyReleased(evt);
-            }
-        });
-        jPanel3.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 160, 30));
+        jPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 440, 120, 40));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/magnifier-left.png"))); // NOI18N
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 30, 30));
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 440, 40, 40));
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 102, 102));
-        jLabel18.setText("Model");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 194, 50, 20));
+        jLabel25.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 400, 260));
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 102, 102));
-        jLabel19.setText("Brand");
-        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 224, 50, 40));
+        jLabel28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 740, -1));
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 102, 102));
-        jLabel20.setText("Register Number");
-        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 274, 100, 20));
+        jLabel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, 160));
 
-        jLabel25.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 360, 160));
+        jLabel29.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 330, 310));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, 380, 370));
+        jButton7.setText("Report");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, -1, -1));
 
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 3, 1110, 490));
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Brand", "Year", "Model", "Engine No", "Capacity", "Milleage", "Chassis No", "Price", "Image", "Description", "Type", "Reg No", "Vid"
+                "Brand", "Year", "Model", "Engine No", "Capacity", "Milleage", "Chassis No", "Price", "Image", "Description", "Type", "Reg No", "Vid", "Cost Price"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, false, false, true, false, false, false, false, false, false, false, false
+                true, true, false, false, true, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -392,7 +558,7 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(153, 204, 255));
+        jTable1.setGridColor(new java.awt.Color(0, 102, 255));
         jTable1.setSelectionBackground(new java.awt.Color(0, 153, 153));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -413,11 +579,12 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(10).setResizable(false);
             jTable1.getColumnModel().getColumn(11).setResizable(false);
             jTable1.getColumnModel().getColumn(12).setResizable(false);
+            jTable1.getColumnModel().getColumn(13).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 1100, 310));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 1100, 190));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 700));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, 700));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -430,7 +597,7 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
 
             int row = jTable1.getSelectedRow();
             if (row != -1) {
-                Database.setData("insert into removevehi(status,brand,modelYear,model,engNum,engCap,mileage,chassisNum,sPrice,vImage,discription,type,regNum,vBoolImg) values('Delete','" + jTable1.getValueAt(row, 0).toString() + "','" + jTable1.getValueAt(row, 1).toString() + "','" + jTable1.getValueAt(row, 2).toString() + "','" + jTable1.getValueAt(row, 3).toString() + "','" + jTable1.getValueAt(row, 4).toString() + "','" + jTable1.getValueAt(row, 5).toString() + "','" + jTable1.getValueAt(row, 6).toString() + "','" + jTable1.getValueAt(row, 7).toString() + "','" + jTable1.getValueAt(row, 8).toString() + "','" + jTable1.getValueAt(row, 9).toString() + "','" + jTable1.getValueAt(row, 10).toString() + "','" + jTable1.getValueAt(row, 11).toString() + "','null')");
+                Database.setData("insert into removevehi(status,brand,modelYear,model,engNum,engCap,mileage,chassisNum,sPrice,vImage,discription,type,regNum,vBoolImg,cost_price) values('Delete','" + jTable1.getValueAt(row, 0).toString() + "','" + jTable1.getValueAt(row, 1).toString() + "','" + jTable1.getValueAt(row, 2).toString() + "','" + jTable1.getValueAt(row, 3).toString() + "','" + jTable1.getValueAt(row, 4).toString() + "','" + jTable1.getValueAt(row, 5).toString() + "','" + jTable1.getValueAt(row, 6).toString() + "','" + jTable1.getValueAt(row, 7).toString() + "','" + jTable1.getValueAt(row, 8).toString() + "','" + jTable1.getValueAt(row, 9).toString() + "','" + jTable1.getValueAt(row, 10).toString() + "','" + jTable1.getValueAt(row, 11).toString() + "','null','" + jTable1.getValueAt(row, 13).toString() + "')");
                 //BalloonTips.viewToolTip(jPanel3,"Deleted Row Affected");
                 Database.setData("delete from vehicle where chassisNum ='" + jTable1.getValueAt(row, 6).toString() + "' ");
 
@@ -445,29 +612,14 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField8MouseClicked
-        jTextField9.setEnabled(false);
-        jTextField10.setEnabled(false);
 
     }//GEN-LAST:event_jTextField8MouseClicked
 
-    private void jTextField9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField9MouseClicked
-        jTextField8.setEnabled(false);
-        jTextField10.setEnabled(false);
-    }//GEN-LAST:event_jTextField9MouseClicked
-
-    private void jTextField10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField10MouseClicked
-        jTextField9.setEnabled(false);
-        jTextField8.setEnabled(false);
-    }//GEN-LAST:event_jTextField10MouseClicked
-
     private void jTextField8MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField8MouseReleased
-        jTextField9.setEnabled(true);
-        jTextField8.setEnabled(true);
-        jTextField10.setEnabled(true);
 
-        jTextField9.setText(null);
-        jTextField8.setText(null);
-        jTextField10.setText(null);
+        //jTextField8.setEnabled(true);
+        //jTextField8.setText(null);
+
     }//GEN-LAST:event_jTextField8MouseReleased
 
     private void jTextField8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField8MouseExited
@@ -488,14 +640,14 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
                 @Override
                 public void run() {
                     for (int i = 0; i <= 100; i++) {
-                      //  jProgressBar1.setValue(i);
+                        //  jProgressBar1.setValue(i);
                         //jProgressBar1.setVisible(true);
                         jLabel26.setVisible(true);
 
                         try {
                             Thread.sleep(20);
                         } catch (NullPointerException e) {
-                            JOptionPane.showMessageDialog(null, "Please select Valide Image","Image Not Selected",1);
+                            JOptionPane.showMessageDialog(null, "Please select Valide Image", "Image Not Selected", 1);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Registerd_Vehicle.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -555,8 +707,18 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
         } else if (fl == 0) {
 
             try {
-                Database.setData("insert into vehicle(brand,modelYear,model,engNum,engCap,mileage,chassisNum,sPrice,vImage,discription,type,regNum,vBoolImg,c_id,status) values('" + jComboBox1.getSelectedItem() + "','" + jTextField1.getText() + "','" + jComboBox2.getSelectedItem() + "','" + jTextField6.getText() + "','" + jTextField2.getText() + "','" + jTextField3.getText() + "','" + jTextField4.getText() + "','" + jTextField7.getText() + "','" + rp + "','" + jTextArea1.getText() + "','" + jComboBox3.getSelectedItem() + "','" + jTextField5.getText() + "','null','0','Registerd') ");
-                JOptionPane.showMessageDialog(null, "Successfully Added" + jComboBox3.getSelectedItem() + "Vehicle");
+                if (jComboBox2.getSelectedItem().toString().equalsIgnoreCase("Select Model")) {
+
+                    JOptionPane.showMessageDialog(null, "please select vehicle model!");
+                } else {
+
+                    //ResultSet rs_type = Database.getData("SELECT model.engCap FROM model WHERE model.model='"+jComboBox2.getSelectedItem()+"'");
+                    //if(rs_type.next()){
+                    Database.setData("insert into vehicle(brand,modelYear,model,engNum,mileage,chassisNum,sPrice,vImage,discription,regNum,vBoolImg,c_id,status,cost_price) values('" + jComboBox1.getSelectedItem() + "','" + jTextField1.getText() + "','" + jComboBox2.getSelectedItem() + "','" + jTextField6.getText() + "','" + jTextField3.getText() + "','" + jTextField4.getText() + "','" + jTextField7.getText() + "','" + rp + "','" + jTextArea1.getText() + "','" + jTextField5.getText() + "','null','0','Registerd','" + jTextField10.getText() + "') ");
+                    JOptionPane.showMessageDialog(null, "Successfully Added Vehicle");
+                    //}
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -610,51 +772,270 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField8KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyReleased
+        String mileage = "";
+        String year = "";
+
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
 
         try {
-            ResultSet rs = Database.getData("SELECT * FROM vehicle WHERE model like'" + jTextField8.getText() + "%" + "' and status='Registerd'");
-            while (rs.next()) {
 
-                Vector v = new Vector();
-                v.add(rs.getString(2));
-                v.add(rs.getString(3));
-                v.add(rs.getString(4));
-                v.add(rs.getString(5));
-                v.add(rs.getString(6));
-                v.add(rs.getString(7));
-                v.add(rs.getString(8));
-                v.add(rs.getString(9));
-                v.add(rs.getString(10));
-                v.add(rs.getString(11));
-                v.add(rs.getString(12));
-                v.add(rs.getString(13));
-                v.add(rs.getString(1));
-                dtm.addRow(v);
+            ResultSet rs_m = Database.getData("SELECT * FROM vehicle WHERE model like'" + jTextField8.getText() + "%" + "' and status='Registerd'");
+            if (jTextField8.getText().equalsIgnoreCase("")) {
 
+            } else if (rs_m.next()) {
+
+                ResultSet rs_m1 = Database.getData("SELECT * FROM vehicle WHERE model like'" + jTextField8.getText() + "%" + "' and status='Registerd'");
+
+                while (rs_m1.next()) {
+
+                    Vector v = new Vector();
+                    v.add(rs_m1.getString(2));
+
+                    year = rs_m1.getString(3);
+
+                    v.add(year);//year
+
+                    String model = rs_m1.getString(4);
+                    v.add(model);//model
+                    v.add(rs_m1.getString(5));
+                    String engcap = "0000";
+
+                    ResultSet rs_cap = Database.getData("SELECT model.engCap,model.type FROM model WHERE model.model='" + model + "'");
+
+                    if (rs_cap.next()) {
+
+                        v.add(rs_cap.getString(1));//engcap
+                        mileage = rs_m1.getString(6);
+                        v.add(mileage);//mileage
+
+                        v.add(rs_m1.getString(7));
+
+                        v.add(rs_m1.getString(8));//price
+                        v.add(rs_m1.getString(9));
+                        v.add(rs_m1.getString(10));
+                        v.add(rs_cap.getString(2));//type
+                        v.add(rs_m1.getString(11));
+                        v.add(rs_m1.getString(1));
+                        v.add(rs_m1.getString(15));
+                        dtm.addRow(v);
+                    }
+
+                }
+            } else {
+
+                ResultSet rs_b = Database.getData("SELECT * FROM vehicle WHERE brand like'" + jTextField8.getText() + "%" + "' and status='Registerd'");
+
+                if (rs_b.next()) {
+
+                    ResultSet rs_b1 = Database.getData("SELECT * FROM vehicle WHERE brand like'" + jTextField8.getText() + "%" + "' and status='Registerd'");
+
+                    while (rs_b1.next()) {
+
+                        Vector v = new Vector();
+                        v.add(rs_b1.getString(2));
+
+                        year = rs_b1.getString(3);
+
+                        v.add(year);//year
+
+                        String model = rs_b1.getString(4);
+                        v.add(model);//model
+                        v.add(rs_b1.getString(5));
+                        String engcap = "0000";
+
+                        ResultSet rs_cap = Database.getData("SELECT model.engCap,model.type FROM model WHERE model.model='" + model + "'");
+
+                        if (rs_cap.next()) {
+
+                            v.add(rs_cap.getString(1));//engcap
+                            mileage = rs_b1.getString(6);
+                            v.add(mileage);//mileage
+
+                            v.add(rs_b1.getString(7));
+
+                            v.add(rs_b1.getString(8));//price
+                            v.add(rs_b1.getString(9));
+                            v.add(rs_b1.getString(10));
+                            v.add(rs_cap.getString(2));
+                            v.add(rs_b1.getString(11));
+                            v.add(rs_b1.getString(1));
+                            v.add(rs_b1.getString(15));
+                            dtm.addRow(v);
+                        }
+
+                    }
+                } else {
+
+                    ResultSet rs_c = Database.getData("SELECT * FROM vehicle WHERE chassisNum like'" + jTextField8.getText() + "%" + "' and status='Registerd'");
+
+                    if (rs_c.next()) {
+
+                        ResultSet rs_c1 = Database.getData("SELECT * FROM vehicle WHERE chassisNum like'" + jTextField8.getText() + "%" + "' and status='Registerd'");
+
+                        while (rs_c1.next()) {
+
+                            Vector v = new Vector();
+                            v.add(rs_c1.getString(2));
+
+                            year = rs_c1.getString(3);
+
+                            v.add(year);//year
+
+                            String model = rs_c1.getString(4);
+                            v.add(model);//model
+                            v.add(rs_c1.getString(5));
+                            String engcap = "0000";
+
+                            ResultSet rs_cap = Database.getData("SELECT model.engCap,model.type FROM model WHERE model.model='" + model + "'");
+
+                            if (rs_cap.next()) {
+
+                                v.add(rs_cap.getString(1));//engcap
+                                mileage = rs_c1.getString(6);
+                                v.add(mileage);//mileage
+
+                                v.add(rs_c1.getString(7));
+
+                                v.add(rs_c1.getString(8));//price
+                                v.add(rs_c1.getString(9));
+                                v.add(rs_c1.getString(10));
+                                v.add(rs_cap.getString(2));
+                                v.add(rs_c1.getString(11));
+                                v.add(rs_c1.getString(1));
+                                v.add(rs_c1.getString(15));
+                                dtm.addRow(v);
+                            }
+
+                        }
+                    } else {
+
+                        ResultSet rs_e = Database.getData("SELECT * FROM vehicle WHERE engNum like'" + jTextField8.getText() + "%" + "' and status='Registerd'");
+
+                        if (rs_e.next()) {
+
+                            ResultSet rs_e1 = Database.getData("SELECT * FROM vehicle WHERE engNum like'" + jTextField8.getText() + "%" + "' and status='Registerd'");
+
+                            while (rs_e1.next()) {
+
+                                Vector v = new Vector();
+                                v.add(rs_e1.getString(2));
+
+                                year = rs_e1.getString(3);
+
+                                v.add(year);//year
+
+                                String model = rs_e1.getString(4);
+                                v.add(model);//model
+                                v.add(rs_e1.getString(5));
+                                String engcap = "0000";
+
+                                ResultSet rs_cap = Database.getData("SELECT model.engCap,model.type FROM model WHERE model.model='" + model + "'");
+
+                                if (rs_cap.next()) {
+
+                                    v.add(rs_cap.getString(1));//engcap
+                                    mileage = rs_e1.getString(6);
+                                    v.add(mileage);//mileage
+
+                                    v.add(rs_e1.getString(7));
+
+                                    v.add(rs_e1.getString(8));//price
+                                    v.add(rs_e1.getString(9));
+                                    v.add(rs_e1.getString(10));
+                                    v.add(rs_cap.getString(2));
+                                    v.add(rs_e1.getString(11));
+                                    v.add(rs_e1.getString(1));
+                                    v.add(rs_e1.getString(15));
+                                    dtm.addRow(v);
+                                }
+
+                            }
+                        } else {
+
+                            ResultSet rs_r = Database.getData("SELECT * FROM vehicle WHERE regNum like'" + jTextField8.getText() + "%" + "' and status='Registerd'");
+
+                            if (rs_r.next()) {
+                                ResultSet rs_r1 = Database.getData("SELECT * FROM vehicle WHERE regNum like'" + jTextField8.getText() + "%" + "' and status='Registerd'");
+
+                                while (rs_r1.next()) {
+
+                                    Vector v = new Vector();
+                                    v.add(rs_r1.getString(2));
+
+                                    year = rs_r1.getString(3);
+
+                                    v.add(year);//year
+
+                                    String model = rs_r1.getString(4);
+                                    v.add(model);//model
+                                    v.add(rs_r1.getString(5));
+                                    String engcap = "0000";
+
+                                    ResultSet rs_cap = Database.getData("SELECT model.engCap,model.type FROM model WHERE model.model='" + model + "'");
+
+                                    if (rs_cap.next()) {
+
+                                        v.add(rs_cap.getString(1));//engcap
+                                        mileage = rs_r1.getString(6);
+                                        v.add(mileage);//mileage
+
+                                        v.add(rs_r1.getString(7));
+
+                                        v.add(rs_r1.getString(8));//price
+                                        v.add(rs_r1.getString(9));
+                                        v.add(rs_r1.getString(10));
+                                        v.add(rs_cap.getString(2));
+                                        v.add(rs_r1.getString(11));
+                                        v.add(rs_r1.getString(1));
+                                        v.add(rs_r1.getString(15));
+                                        dtm.addRow(v);
+                                    }
+
+                                }
+                            } else {
+
+                            }
+                        }
+                    }
+                }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }//GEN-LAST:event_jTextField8KeyReleased
 
     String imgp;
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // jLabel11.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-        jTextField12.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-        jTextField1.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
-        jTextField13.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
-        jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-        jTextField3.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
-        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString());
-        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 11).toString());
-        jTextField6.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-        jTextField7.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString());
-        jTextField14.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 10).toString());
-        jTextArea1.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 9).toString());
-        jLabel21.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 12).toString());
+
+        String model = jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString();
+        try {
+            ResultSet e_capAndTypeRs = Database.getData("SELECT model.engCap,model.type FROM model WHERE model.model='" + model + "'");
+
+            if (e_capAndTypeRs.next()) {
+                jTextField9.setText(e_capAndTypeRs.getString(1));//ENGIN CAPACITY
+                jTextField14.setText(e_capAndTypeRs.getString(2));//TYPE
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        jTextField12.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());//BRAND
+        jTextField1.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());//MODEL YEAR
+        jTextField2.setText(model);//MODEL
+
+        jTextField3.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());//MILEAGE
+        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString());//CHASISS NUMBER
+        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 11).toString());//REGISTER NUMBER
+        jTextField6.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());//ENGINE NUMBER
+        jTextField7.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString());//SELLING PRICE
+
+        jTextArea1.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 9).toString());//DESCRIPTION
+        jLabel21.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 12).toString());//VEHICAL ID
+        jTextField10.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 13).toString());//COST PRICE
 
         String n = jTable1.getValueAt(jTable1.getSelectedRow(), 8).toString();
         String x = n.replace('/', '\\');
@@ -667,89 +1048,6 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jTextField9KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField9KeyReleased
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        dtm.setRowCount(0);
-
-        try {
-            ResultSet rs = Database.getData("SELECT * FROM vehicle WHERE brand like'" + jTextField9.getText() + "%" + "' and status='Registerd'");
-            while (rs.next()) {
-
-                Vector v = new Vector();
-                v.add(rs.getString(2));
-                v.add(rs.getString(3));
-                v.add(rs.getString(4));
-                v.add(rs.getString(5));
-                v.add(rs.getString(6));
-                v.add(rs.getString(7));
-                v.add(rs.getString(8));
-                v.add(rs.getString(9));
-                v.add(rs.getString(10));
-                v.add(rs.getString(11));
-                v.add(rs.getString(12));
-                v.add(rs.getString(13));
-                v.add(rs.getString(1));
-                dtm.addRow(v);
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jTextField9KeyReleased
-
-    private void jTextField10KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField10KeyReleased
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        dtm.setRowCount(0);
-
-        try {
-            ResultSet rs = Database.getData("SELECT * FROM vehicle WHERE regNum like'" + jTextField10.getText() + "%" + "' and status='Registerd'");
-            while (rs.next()) {
-
-                Vector v = new Vector();
-                v.add(rs.getString(2));
-                v.add(rs.getString(3));
-                v.add(rs.getString(4));
-                v.add(rs.getString(5));
-                v.add(rs.getString(6));
-                v.add(rs.getString(7));
-                v.add(rs.getString(8));
-                v.add(rs.getString(9));
-                v.add(rs.getString(10));
-                v.add(rs.getString(11));
-                v.add(rs.getString(12));
-                v.add(rs.getString(13));
-                v.add(rs.getString(1));
-                dtm.addRow(v);
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jTextField10KeyReleased
-
-    private void jTextField9MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField9MouseReleased
-        jTextField9.setEnabled(true);
-        jTextField8.setEnabled(true);
-        jTextField10.setEnabled(true);
-
-        jTextField9.setText(null);
-        jTextField8.setText(null);
-        jTextField10.setText(null);
-
-    }//GEN-LAST:event_jTextField9MouseReleased
-
-    private void jTextField10MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField10MouseReleased
-        jTextField9.setEnabled(true);
-        jTextField8.setEnabled(true);
-        jTextField10.setEnabled(true);
-
-        jTextField9.setText(null);
-        jTextField8.setText(null);
-        jTextField10.setText(null);
-    }//GEN-LAST:event_jTextField10MouseReleased
-
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String rp = path.replace('\\', '/');
@@ -761,8 +1059,20 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
             if (row != -1) {
 
                 try {
-                    Database.setData("update vehicle set brand='" + jComboBox1.getSelectedItem() + "',modelYear='" + jTextField1.getText() + "',model='" + jComboBox2.getSelectedItem() + "',engNum='" + jTextField6.getText() + "',engCap='" + jTextField2.getText() + "',mileage='" + jTextField3.getText() + "',chassisNum='" + jTextField4.getText() + "',sPrice='" + jTextField7.getText() + "',vImage='" + rp + "',discription='" + jTextArea1.getText() + "',type='" + jComboBox3.getSelectedItem() + "',regNum='" + jTextField5.getText() + "' where v_id='" + jLabel21.getText() + "'");
-                    JOptionPane.showMessageDialog(null, "Vehicle Updated Succesfully");
+
+                    if (jComboBox2.getSelectedItem().toString().equalsIgnoreCase("Select Model")) {
+
+                        JOptionPane.showMessageDialog(null, "please select vehicle model!");
+                    } else {
+
+                        // ResultSet rs_type = Database.getData("SELECT model.engCap FROM model WHERE model.model='"+jComboBox2.getSelectedItem()+"'");
+                        //if(rs_type.next()){
+                        Database.setData("update vehicle set brand='" + jComboBox1.getSelectedItem() + "',modelYear='" + jTextField1.getText() + "',model='" + jComboBox2.getSelectedItem() + "',engNum='" + jTextField6.getText() + "',mileage='" + jTextField3.getText() + "',chassisNum='" + jTextField4.getText() + "',sPrice='" + jTextField7.getText() + "',vImage='" + rp + "',discription='" + jTextArea1.getText() + "',regNum='" + jTextField5.getText() + "',cost_price = '" + jTextField10.getText() + "' where v_id='" + jLabel21.getText() + "' ");
+                        JOptionPane.showMessageDialog(null, "Vehicle Updated Succesfully");
+
+                        // }
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -777,13 +1087,201 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-                tablesearch();
-    }//GEN-LAST:event_jButton7ActionPerformed
-
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+
+        tablesearch1();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
+
+        if (jCheckBox1.isSelected()) {
+
+            dis[0] = 1;
+
+        } else {
+            dis[0] = 0;
+
+        }
+        jTextArea1.setText("");
+        discriptionLoder();
+
+        //System.out.println(jCheckBox1.isSelected());
+    }//GEN-LAST:event_jCheckBox1MouseClicked
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jCheckBox2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox2MouseClicked
+        if (jCheckBox2.isSelected()) {
+
+            dis[1] = 1;
+        } else {
+            dis[1] = 0;
+        }
+
+        discriptionLoder();
+    }//GEN-LAST:event_jCheckBox2MouseClicked
+
+    private void jCheckBox3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox3MouseClicked
+        if (jCheckBox3.isSelected()) {
+
+            dis[2] = 1;
+        } else {
+            dis[2] = 0;
+        }
+
+        discriptionLoder();
+    }//GEN-LAST:event_jCheckBox3MouseClicked
+
+    private void jCheckBox4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox4MouseClicked
+        if (jCheckBox4.isSelected()) {
+
+            dis[3] = 1;
+        } else {
+            dis[3] = 0;
+        }
+
+        discriptionLoder();
+    }//GEN-LAST:event_jCheckBox4MouseClicked
+
+    private void jCheckBox5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox5MouseClicked
+        if (jCheckBox5.isSelected()) {
+
+            dis[4] = 1;
+        } else {
+            dis[4] = 0;
+        }
+
+        discriptionLoder();
+    }//GEN-LAST:event_jCheckBox5MouseClicked
+
+    private void jCheckBox6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox6MouseClicked
+        if (jCheckBox6.isSelected()) {
+
+            dis[5] = 1;
+        } else {
+            dis[5] = 0;
+        }
+
+        discriptionLoder();
+    }//GEN-LAST:event_jCheckBox6MouseClicked
+
+    private void jCheckBox7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox7MouseClicked
+        if (jCheckBox7.isSelected()) {
+
+            dis[6] = 1;
+        } else {
+            dis[6] = 0;
+        }
+
+        discriptionLoder();
+    }//GEN-LAST:event_jCheckBox7MouseClicked
+
+    private void jCheckBox8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox8MouseClicked
+        if (jCheckBox8.isSelected()) {
+
+            dis[7] = 1;
+        } else {
+            dis[7] = 0;
+        }
+
+        discriptionLoder();
+    }//GEN-LAST:event_jCheckBox8MouseClicked
+
+    private void jCheckBox9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox9MouseClicked
+        if (jCheckBox9.isSelected()) {
+
+            dis[8] = 1;
+        } else {
+            dis[8] = 0;
+        }
+
+        discriptionLoder();
+    }//GEN-LAST:event_jCheckBox9MouseClicked
+
+    private void jCheckBox10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox10MouseClicked
+        if (jCheckBox10.isSelected()) {
+
+            dis[9] = 1;
+        } else {
+            dis[9] = 0;
+        }
+
+        discriptionLoder();
+    }//GEN-LAST:event_jCheckBox10MouseClicked
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox8ActionPerformed
+
+    private void jTextField10KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField10KeyReleased
+
+        if (jTextField1.getText().equalsIgnoreCase("")) {
+
+            JOptionPane.showMessageDialog(null, "first enter model year!");
+        } else if (jTextField3.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(null, "first enter mileage!");
+        } else if (jTextField10.getText().equalsIgnoreCase("")) {
+
+            jTextField7.setText("0.00");
+        } else {
+
+            jTextField7.setText(calculatePrice(jTextField10.getText(), jTextField1.getText(), jTextField3.getText()));
+        }
+    }//GEN-LAST:event_jTextField10KeyReleased
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+
+        try {
+            String y = jTextField1.getText();
+            int c = y.length();
+            if (c >= 5) {
+                JOptionPane.showMessageDialog(null, "incorrect model Year!");
+            } else if (jTextField1.getText().equalsIgnoreCase("")) {
+
+            } else {
+                int year = Integer.parseInt(y);
+            }
+
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(null, "insert correct model Year!");
+        }
+
+
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
+
+        if (jTextField3.getText().equalsIgnoreCase("")) {
+
+        } else {
+
+            try {
+                String y = jTextField3.getText();
+                double mile = Double.valueOf(y);
+
+            } catch (NumberFormatException e) {
+
+                JOptionPane.showMessageDialog(null, "incorrect Mileage!");
+            }
+
+        }
+
+    }//GEN-LAST:event_jTextField3KeyReleased
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -794,9 +1292,19 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox10;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -816,6 +1324,9 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -826,7 +1337,6 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
@@ -834,7 +1344,6 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -860,16 +1369,28 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
         }
     }
 
-    private void typecombo() {
-        jComboBox3.addItem("Car");
-        jComboBox3.addItem("Van");
-        jComboBox3.addItem("Bus");
-        jComboBox3.addItem("Truck");
-        jComboBox3.addItem("Lorry");
-        jComboBox3.addItem("Jeep");
+    public void discriptionLoder() {
+
+        jTextArea1.setText("");
+        String discrp = "";
+        for (int r = 0; r < 10; r++) {
+
+            if (dis[r] == 1) {
+
+                discrp = discrp + (dis_Name[r] + "/ ");
+
+            }
+
+        }
+
+        jTextArea1.setText(discrp);
     }
 
-    private void tablesearch() {
+    
+
+    private void tablesearch1() {
+        String mileage = "";
+        String year = "";
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
 
@@ -879,24 +1400,93 @@ public class Registerd_Vehicle extends javax.swing.JPanel {
 
                 Vector v = new Vector();
                 v.add(rs.getString(2));
-                v.add(rs.getString(3));
-                v.add(rs.getString(4));
+
+                year = rs.getString(3);
+
+                v.add(year);//year
+                String model = rs.getString(4);
+                v.add(model);//model
                 v.add(rs.getString(5));
-                v.add(rs.getString(6));
-                v.add(rs.getString(7));
-                v.add(rs.getString(8));
-                v.add(rs.getString(9));
-                v.add(rs.getString(10));
-                v.add(rs.getString(11));
-                v.add(rs.getString(12));
-                v.add(rs.getString(13));
-                v.add(rs.getString(1));
-                dtm.addRow(v);
+                String engcap = "0000";
+
+                ResultSet rs_cap = Database.getData("SELECT  model.engCap,model.type FROM model WHERE model.model='" + model + "'");
+
+                if (rs_cap.next()) {
+
+                    v.add(rs_cap.getString(1));//engcap
+                    mileage = rs.getString(6);
+                    v.add(mileage);//mileage
+
+                    v.add(rs.getString(7));
+
+                    v.add(rs.getString(8));//price
+                    v.add(rs.getString(9));
+                    v.add(rs.getString(10));
+
+                    v.add(rs_cap.getString(2));//type 11
+                    v.add(rs.getString(11));
+                    v.add(rs.getString(1));
+                    v.add(rs.getString(15));
+                    dtm.addRow(v);
+                }
 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String calculatePrice(String getPrice, String getModelYear, String getMileage) {
+
+        Date date = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+
+        final int COUNT_MILEAGE = 20000;
+
+        double price = Double.valueOf(getPrice);
+        int modelYear = Integer.valueOf(getModelYear);
+        int mileAge = Integer.valueOf(getMileage);
+
+        //INCREMENT PRICE IN 10% FOR ANY VEHICLE
+        price = price + (price * 0.05);
+
+        //CHECK AND INCREMENT PRICE CONSIDER VIA MODEL YEAR
+        for (int i = 0; i < 8; i++) {
+
+            year = year - 2;
+
+            if (year <= modelYear) {
+
+                price = price + (price * ((8 - i) / (100.00)));
+                break;
+
+            } else if (modelYear < 2002) {
+                break;
+            }
+        }
+
+        //REDUCE PRICE ACCORDING ABOUT MILEAGE COUNT
+        int calMilage = 0;
+
+        for (int r = 0; r < 8; r++) {
+
+            calMilage = calMilage + COUNT_MILEAGE;
+
+            if (calMilage > mileAge) {
+
+                price = price - (price * ((r * 0.5) / 100));
+                break;
+            } else if (160000 < mileAge) {
+                price = price - (price * (4 / 100));
+                break;
+            }
+        }
+
+        long p = (int) price;
+        return String.valueOf(p);
+
     }
 }

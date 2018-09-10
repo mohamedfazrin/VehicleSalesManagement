@@ -3,9 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+ 
+ // path - D:\SLIIT\IT-Project\Vehicle Sale Project\Project\VehicleSalesManagement\src\vehiclesalesmanagement
+ // Menik akka.
 package vehiclesalesmanagement;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
+import javafx.beans.binding.Bindings;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.util.regex.*;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
+import static vehiclesalesmanagement.Registerd_Vehicle.path;
 
 /**
  *
@@ -13,11 +34,16 @@ import javax.swing.JOptionPane;
  */
 public class Customer extends javax.swing.JPanel {
 
+    private String text=null;
+    private String gen=null;
+    private String bar="";
     /**
      * Creates new form Customer
      */
     public Customer() {
         initComponents();
+        tableSearchCustomer();
+       //tablesearch();
     }
 
     /**
@@ -31,26 +57,37 @@ public class Customer extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nic_tf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        pno_tf = new javax.swing.JTextField();
+        mail_tf = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        name_tf = new javax.swing.JTextField();
+        addres_tf = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        add_b = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        del_b = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        re_la = new javax.swing.JLabel();
+        re_b = new javax.swing.JButton();
+        jLabel58 = new javax.swing.JLabel();
+        repo_b = new javax.swing.JButton();
+        edit_b = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        search_tf = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        bar_tf = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        search_cb = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        details_cb = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -68,45 +105,66 @@ public class Customer extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Name");
 
+        addres_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                addres_tfKeyReleased(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel12.setText("Address");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField5))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(addres_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                        .addComponent(nic_tf)
+                        .addComponent(pno_tf)
+                        .addComponent(name_tf))
+                    .addComponent(mail_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nic_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(name_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pno_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mail_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addres_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -114,56 +172,190 @@ public class Customer extends javax.swing.JPanel {
 
             },
             new String [] {
-                "CID", "NIC", "Phone Number", "Email"
+                "Date", "CID", "DID", "NIC", "Name", "Phone Number", "Email", "Address", "Gender", "DOB"
             }
         ));
+        jTable1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTable1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(51, 255, 255), null));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Add.png"))); // NOI18N
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 40, 30));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 40, 30));
 
-        jButton1.setText("Add Customer");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        add_b.setText("Add Customer");
+        add_b.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                add_bActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 21, 168, 47));
+        jPanel2.add(add_b, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 168, 47));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Trash.gif"))); // NOI18N
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 30, 30));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 30, 30));
 
-        jButton2.setText("Delete Customer");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 74, 168, 45));
+        del_b.setText("Delete Customer");
+        del_b.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                del_bActionPerformed(evt);
+            }
+        });
+        jPanel2.add(del_b, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 168, 45));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/arrow-repeat-once.png"))); // NOI18N
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 30, 40));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 30, 40));
 
-        jButton3.setText("Update Customer");
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 125, 168, 48));
-        jPanel2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 160, 40));
+        re_la.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Refresh.png"))); // NOI18N
+        jPanel2.add(re_la, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 90, 40));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel7.setText("NIC");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 50, 40));
+        re_b.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        re_b.setForeground(new java.awt.Color(0, 204, 204));
+        re_b.setText("         Refresh");
+        re_b.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                re_bActionPerformed(evt);
+            }
+        });
+        jPanel2.add(re_b, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 170, 50));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/magnifier-left.png"))); // NOI18N
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 220, 50, 40));
+        jLabel58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/printer_add.png"))); // NOI18N
+        jPanel2.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 40, 30));
+
+        repo_b.setLabel("Print Report");
+        repo_b.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                repo_bActionPerformed(evt);
+            }
+        });
+        jPanel2.add(repo_b, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 170, 50));
+
+        edit_b.setText("Update Customer");
+        edit_b.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edit_bActionPerformed(evt);
+            }
+        });
+        jPanel2.add(edit_b, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 168, 48));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(102, 255, 255), null));
+
+        search_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_tfActionPerformed(evt);
+            }
+        });
+        search_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_tfKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                search_tfKeyTyped(evt);
+            }
+        });
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/magnifier-left.png"))); // NOI18N
+
+        bar_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bar_tfActionPerformed(evt);
+            }
+        });
+        bar_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                bar_tfKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                bar_tfKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                bar_tfKeyTyped(evt);
+            }
+        });
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/magnifier-left.png"))); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel11.setText("Details");
+
+        search_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NIC", "Name", "CID", "Date" }));
+        search_cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_cbActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel13.setText("Barcode");
+
+        details_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "All Data", "Deleted" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bar_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(search_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(details_cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(259, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(bar_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(search_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(search_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(details_cb))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(28, 28, 28)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(246, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -171,58 +363,788 @@ public class Customer extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(308, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
+    private void add_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_bActionPerformed
+      
+        String nic = nic_tf.getText();
+        String barcode = bar_tf.getText();
+        //String bar ="";
+        
+        if(validatetf())
+        {
+            try
+            {
+                ResultSet rs = Database.getData("select d_id FROM discount WHERE barcodeId = '"+barcode+"'"); 
+         
+                 while (rs.next()) 
+                {
+                   bar = rs.getString(1);
+                   
+                }
             
-            Database.setData("insert into customer values('0','"+jTextField1.getText()+"','"+jTextField2.getText()+"','"+jTextField3.getText()+"','"+jTextField5.getText()+"')");
-            JOptionPane.showMessageDialog(null,"Customer Succeessfully Added");
+            }
+            catch (Exception e)
+            {
+                JOptionPane.showMessageDialog(null,"Barcode Error" );
+            }
             
-            jTextField1.setText(null);
-            jTextField2.setText(null);
-            jTextField3.setText(null);
-             jTextField5.setText(null);
+           try 
+           {
+               dobCalc();
+                if(bar == "")
+                {
+                    bar = "3";
+                    Database.setData("insert into customer (did,nic,phone,email, name, address,status,gender,dob) values ('"+bar+"' ,'"+ nic +"' , '" +pno_tf.getText()+"' , '" +mail_tf.getText()+"', '"+name_tf.getText()+ "','"+addres_tf.getText()+"','Live','"+ gen +"' ,'"+ text +"')") ;
+                }
+                else
+                {
+                    Database.setData("insert into customer (did,nic,phone,email, name, address,status,gender,dob ) values ('"+bar+"' ,'"+ nic +"' , '" +pno_tf.getText()+"' , '" +mail_tf.getText()+"', '"+name_tf.getText()+ "','"+addres_tf.getText()+"','Live','"+ gen +"' ,'"+ text +"')") ;
+                    
+                }
+                
+                 
+            
+                
+                JOptionPane.showMessageDialog(null,"Customer Successfully Added");
+                
+            
+
+            nic_tf.setText(null);
+            pno_tf.setText(null);
+            mail_tf.setText(null);
+            name_tf.setText(null);
+            addres_tf.setText(null);
             
             
+            } 
+           catch (Exception e) 
+           {
+            //System.out.println("Error 0"+e);
+             JOptionPane.showMessageDialog(null,"Failed" + e); 
+           }
+        
+       } 
+        
+        
+    }//GEN-LAST:event_add_bActionPerformed
+
+    private void del_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_del_bActionPerformed
+       DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+       
+       int row = jTable1.getSelectedRow();
+       if (row != -1) 
+       {
+            try 
+            {
+                    int confirm = JOptionPane.showConfirmDialog(null,"Do you really want to delete?", "Delete",JOptionPane.YES_NO_OPTION);
+                    if(confirm == 0)
+                    {
+
+                        Database.setData("UPDATE customer set status = 'Deleted' where NIC ='" + jTable1.getValueAt(row, 3).toString() + "' ");
+
+                        JOptionPane.showMessageDialog(null, "Deleted");
+                        dtm.removeRow(row);
+                    } 
+
+
+            }
+            catch (Exception e) 
+            {
+                     e.printStackTrace();
+                     JOptionPane.showMessageDialog(null,e);
+            }
+       }
+       else 
+       {
+            JOptionPane.showMessageDialog(null, "Please First Select Row From a Table");
+       }
+    }//GEN-LAST:event_del_bActionPerformed
+
+    private void edit_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edit_bActionPerformed
+
+        String nic = nic_tf.getText();
+        String barcode = bar_tf.getText();
+        //String bar ="";
+        
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        int row = jTable1.getSelectedRow(); 
+        if (row != -1) 
+        { 
+          
+            try 
+            {
+                int confirm = JOptionPane.showConfirmDialog(null,"Do you really want to update?", "Delete",JOptionPane.YES_NO_OPTION);
+                if(confirm == 0)
+                {
+                     try
+                    {
+                        ResultSet rs = Database.getData("select d_id FROM discount WHERE barcodeId = '"+barcode+"'"); 
+
+                     while (rs.next()) 
+                    {
+                       bar = rs.getString(1);
+
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    JOptionPane.showMessageDialog(null,"Barcode Error");
+                }
+
+                    
+                try 
+                {
+                    dobCalc();
+                    if(bar == "")
+                    {    
+                        bar = "3";
+                        Database.setData("update customer set did = '" +bar+ "' ,NIC='" + nic + "',phone='" + pno_tf.getText() + "',email='" + mail_tf.getText() + "',name='" + name_tf.getText()+ "',address='" + addres_tf.getText() + "' ,gender = '"+gen+ "' , dob = '"+text+"' where NIC ='" + jTable1.getValueAt(row, 3).toString() + "' ");    
+                    } 
+                    
+                    else
+                    {
+                         Database.setData("update customer set did = '" +bar+ "' ,NIC='" + nic + "',phone='" + pno_tf.getText() + "',email='" + mail_tf.getText() + "',name='" + name_tf.getText()+ "',address='" + addres_tf.getText() +"' ,gender = '"+gen+ "' , dob = '"+text+"' where NIC ='" + jTable1.getValueAt(row, 3).toString() + "' ");
+                    }
+                    JOptionPane.showMessageDialog(null, "Customer Updated Succesfully");
+                } 
+                    catch (Exception e) 
+                    {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null,"Update Failed" );
+                    }
+
+                } 
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+            //tableSearchCustomer();
+       }
+        
+        else 
+        {
+            JOptionPane.showMessageDialog(null, "Please First Select Updated Customer from table");
+        }
+    }//GEN-LAST:event_edit_bActionPerformed
+    private void tableSearchCustomer() {
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
+
+        if(details_cb.getSelectedItem() == "All Data")
+        {
+            try {
+                ResultSet rs = Database.getData("select * from customer ");
+            
+                while (rs.next()) 
+                {
+
+                    Vector v = new Vector();
+
+                    v.add(rs.getString(7));  //TB1 = DB7
+                    v.add(rs.getString(1));  //TB2 = DB1 
+                    v.add(rs.getString(2));  //TB3 = DB2
+                    v.add(rs.getString(3));  //TB4 = DB3
+                    v.add(rs.getString(6));  //TB5 = DB6
+                    v.add(rs.getString(4));  //TB6 = DB4
+                    v.add(rs.getString(5));  //TB7 = DB5
+                    v.add(rs.getString(8));  //TB8 = DB8
+                    v.add(rs.getString(9));  //TB9 = DB9
+                    v.add(rs.getString(10)); //TB10 = DB10
+
+                    dtm.addRow(v);
+
+            }
+
         } catch (Exception e) {
+            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, e); 
+        }
+         //tableSearchCustomer();
+        }  
+        
+        if(details_cb.getSelectedItem() == "Deleted")
+        {
+            try {
+                ResultSet rs = Database.getData("select * from customer WHERE status = 'Deleted'");             
+                while (rs.next()) 
+                {
+
+                    Vector v = new Vector();
+
+                    v.add(rs.getString(7));  //TB1 = DB7
+                    v.add(rs.getString(1));  //TB2 = DB1 
+                    v.add(rs.getString(2));  //TB3 = DB2
+                    v.add(rs.getString(3));  //TB4 = DB3
+                    v.add(rs.getString(6));  //TB5 = DB6
+                    v.add(rs.getString(4));  //TB6 = DB4
+                    v.add(rs.getString(5));  //TB7 = DB5
+                    v.add(rs.getString(8));  //TB8 = DB8
+                    v.add(rs.getString(9));  //TB9 = DB9
+                    v.add(rs.getString(10)); //TB10 = DB10
+
+                    dtm.addRow(v);
+
+                }
+
+        } 
+            catch (Exception e) 
+        {
+            e.printStackTrace();
+           JOptionPane.showMessageDialog(null, e); 
+        }
+         //tableSearchCustomer();
+        }  
+        
+        if(details_cb.getSelectedItem() == "Default")
+        {
+            try {
+                ResultSet rs = Database.getData("select * from customer WHERE status = 'Live' order by cid desc limit 5");
+                
+                while (rs.next()) 
+                {
+
+                    Vector v = new Vector();
+
+                    v.add(rs.getString(7));  //TB1 = DB7
+                    v.add(rs.getString(1));  //TB2 = DB1 
+                    v.add(rs.getString(2));  //TB3 = DB2
+                    v.add(rs.getString(3));  //TB4 = DB3
+                    v.add(rs.getString(6));  //TB5 = DB6
+                    v.add(rs.getString(4));  //TB6 = DB4
+                    v.add(rs.getString(5));  //TB7 = DB5
+                    v.add(rs.getString(8));  //TB8 = DB8
+                    v.add(rs.getString(9));  //TB9 = DB9
+                    v.add(rs.getString(10)); //TB10 = DB10
+
+                    dtm.addRow(v);
+
+                }
+
+            } 
+            catch (Exception e) 
+            {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e); 
+            }
+             
+        }  
+       
+    }
+    
+    private void search_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_tfActionPerformed
+
+    }//GEN-LAST:event_search_tfActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+        nic_tf.setText(jTable1.getValueAt(jTable1.getSelectedRow(),3).toString());
+        pno_tf.setText(jTable1.getValueAt(jTable1.getSelectedRow(),5).toString());
+        mail_tf.setText(jTable1.getValueAt(jTable1.getSelectedRow(),6).toString());
+        name_tf.setText(jTable1.getValueAt(jTable1.getSelectedRow(),4).toString()); 
+        addres_tf.setText(jTable1.getValueAt(jTable1.getSelectedRow(),7).toString());
+       
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable1AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1AncestorAdded
+
+    private void search_tfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_tfKeyReleased
+         //tableSearchCustomerUseNic();
+         String search =search_tf.getText();
+        if(search_cb.getSelectedItem() == "NIC") 
+        {
+            //String search =search_tf.getText();
+            if(search.equalsIgnoreCase(""))
+            {
+                tableSearchCustomer();
+            }
+            
+            else
+            {
+                DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                dtm.setRowCount(0);
+
+                try 
+                {
+            
+                    ResultSet rs = Database.getData("SELECT * FROM customer where NIC like '"+search+"%'"); // search from ID
+           
+                    while (rs.next()) 
+                    {
+
+                        Vector v = new Vector();
+
+                        v.add(rs.getString(7));  //TB1 = DB7
+                        v.add(rs.getString(1));  //TB2 = DB1 
+                        v.add(rs.getString(2));  //TB3 = DB2
+                        v.add(rs.getString(3));  //TB4 = DB3
+                        v.add(rs.getString(6));  //TB5 = DB6
+                        v.add(rs.getString(4));  //TB6 = DB4
+                        v.add(rs.getString(5));  //TB7 = DB5
+                        v.add(rs.getString(8));  //TB8 = DB8
+                        v.add(rs.getString(9));  //TB9 = DB9
+                        v.add(rs.getString(10)); //TB10 = DB10
+
+                        dtm.addRow(v);
+
+                    }
+
+            } 
+            catch (Exception e) 
+            {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e); 
+            }  
+         } 
+    }
+        
+        if(search_cb.getSelectedItem() == "Name") 
+        {
+            //String search =search_tf.getText();
+            if(search.equalsIgnoreCase(""))
+            {
+                tableSearchCustomer();
+            }
+            else
+            {
+                DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                dtm.setRowCount(0);
+
+                try 
+                {
+                    ResultSet rs = Database.getData("SELECT * FROM customer WHERE name like '%"+search+"%'"); // search from name
+           
+                    while (rs.next()) 
+                    {
+
+                        Vector v = new Vector();
+
+                        v.add(rs.getString(7));  //TB1 = DB7
+                        v.add(rs.getString(1));  //TB2 = DB1 
+                        v.add(rs.getString(2));  //TB3 = DB2
+                        v.add(rs.getString(3));  //TB4 = DB3
+                        v.add(rs.getString(6));  //TB5 = DB6
+                        v.add(rs.getString(4));  //TB6 = DB4
+                        v.add(rs.getString(5));  //TB7 = DB5
+                        v.add(rs.getString(8));  //TB8 = DB8
+                        v.add(rs.getString(9));  //TB9 = DB9
+                        v.add(rs.getString(10)); //TB10 = DB10
+
+                        dtm.addRow(v);
+
+                    }
+
+            } 
+            catch (Exception e) 
+            {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e); 
+            }  
+         } 
+    }
+         
+        if(search_cb.getSelectedItem() == "Date") 
+        {
+            //String search =search_tf.getText();
+            if(search.equalsIgnoreCase(""))
+            {
+                tableSearchCustomer();
+            }
+            else{
+                    DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                    dtm.setRowCount(0);
+
+                    try 
+                    {
+              
+                        ResultSet rs = Database.getData("SELECT * FROM customer WHERE date_time like '"+search+"%'"); // search from date
+               
+                        while (rs.next()) 
+                        {
+
+                            Vector v = new Vector();
+
+                            v.add(rs.getString(7));  //TB1 = DB7
+                            v.add(rs.getString(1));  //TB2 = DB1 
+                            v.add(rs.getString(2));  //TB3 = DB2
+                            v.add(rs.getString(3));  //TB4 = DB3
+                            v.add(rs.getString(6));  //TB5 = DB6
+                            v.add(rs.getString(4));  //TB6 = DB4
+                            v.add(rs.getString(5));  //TB7 = DB5
+                            v.add(rs.getString(8));  //TB8 = DB8
+                            v.add(rs.getString(9));  //TB9 = DB9
+                            v.add(rs.getString(10)); //TB10 = DB10
+
+                            dtm.addRow(v);
+
+                        }
+
+                    } 
+                    catch (Exception e) 
+                    {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, e); 
+                    }  
+            } 
+       }
+      
+        if(search_cb.getSelectedItem() == "CID") 
+         {
+             //String search =search_tf.getText();
+             if(search.equalsIgnoreCase(""))
+             {
+                 tableSearchCustomer();
+             }
+             else 
+             {
+                DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                dtm.setRowCount(0);
+
+                try 
+                {
+                
+                    ResultSet rs = Database.getData("SELECT * FROM customer WHERE cid like '"+search+"%'"); // search from cid
+                    while (rs.next()) 
+                    {
+
+                        Vector v = new Vector();
+
+                        v.add(rs.getString(7));  //TB1 = DB7
+                        v.add(rs.getString(1));  //TB2 = DB1 
+                        v.add(rs.getString(2));  //TB3 = DB2
+                        v.add(rs.getString(3));  //TB4 = DB3
+                        v.add(rs.getString(6));  //TB5 = DB6
+                        v.add(rs.getString(4));  //TB6 = DB4
+                        v.add(rs.getString(5));  //TB7 = DB5
+                        v.add(rs.getString(8));  //TB8 = DB8
+                        v.add(rs.getString(9));  //TB9 = DB9
+                        v.add(rs.getString(10)); //TB10 = DB10
+
+                        dtm.addRow(v);
+
+                    }
+
+                } 
+                catch (Exception e) 
+                {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, e); 
+                }  
+            } 
+        }
+         
+    }//GEN-LAST:event_search_tfKeyReleased
+
+    private void re_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_re_bActionPerformed
+         tableSearchCustomer(); 
+         nic_tf.setText(null);
+         pno_tf.setText(null);
+         mail_tf.setText(null);
+         name_tf.setText(null); 
+         addres_tf.setText(null);
+         search_tf.setText(null);
+
+    }//GEN-LAST:event_re_bActionPerformed
+
+    private void bar_tfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bar_tfKeyReleased
+    
+    }//GEN-LAST:event_bar_tfKeyReleased
+   /* public float calcDiscount()
+    {   
+        String nic = nic_tf.getText();
+        String cus_id = "";
+        String tot = "";
+        int discount = 0;
+        int amount = 0;
+        
+        try
+        {               // get cid num from nic text field
+            ResultSet id = Database.getData ("SELECT  cid  FROM customer WHERE NIC  = '"+ nic +"' ");
+            
+              while (id.next()) 
+                {
+                   cus_id = id.getString(1);   // assign cid to cus_id
+                   
+                }
+        }
+         catch(Exception e)
+        {
+             JOptionPane.showMessageDialog(null, "Query1 failed ");
         }
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try
+        {
+            // get total amount about that cid from sale table
+            ResultSet dis = Database.getData ("SELECT SUM (amount) FROM  sale WHERE c_id  = '"+ cus_id +"' ");
+            JOptionPane.showMessageDialog(null, "Query Success ");
+            
+              while (dis.next()) 
+                {
+                   tot = dis.getString(1);
+                }
+        }
+        catch(Exception e)
+        {
+             JOptionPane.showMessageDialog(null, "Query failed ");
+        }
+        
+        amount = Integer.parseInt(tot);
+        if(amount >= 100000)  // 100 000
+        {
+            discount = amount - ((amount * 6)/100);
+            //return  discount;
+        }
+        else if(bar == "2")
+        {
+            discount = amount - ((amount * 10)/100);
+           // return  discount;
+        }
+        
+        else if(bar == "3")
+        {
+            discount = amount;
+            //return  discount;
+        }
+        else if(bar == "4")
+        {
+            discount = amount - ((amount * 12)/100);  
+            //return  discount;
+        }
+        return discount;
+    } */ 
+    public boolean validatetf()
+    {
+        if(nic_tf.getText().equalsIgnoreCase(""))
+        {
+            JOptionPane.showMessageDialog(null, "Enter valild NIC "); 
+            return false;
+        }
+       
+        else if(mail_tf.getText().equalsIgnoreCase(""))
+        {
+             JOptionPane.showMessageDialog(null, "Enter valid Email "); 
+            return false;
+        }
+        else if(pno_tf.getText().equalsIgnoreCase("") )//|| pno_tf.getText().matches("[0-9 +]") && pno_tf.getText().length()== 10 || pno_tf.getText().length() == 12 )   
+        {
+             JOptionPane.showMessageDialog(null, "Enter valid phone "); 
+            return false;
+        }
+        else if(name_tf.getText().equalsIgnoreCase("") )//|| name_tf.getText().matches("[0-9 , !@#$%^&*()]"))
+        {
+             JOptionPane.showMessageDialog(null, "Enter valid name "); 
+            return false;
+        }
+        else if(addres_tf.getText().equalsIgnoreCase("")) 
+        {
+             JOptionPane.showMessageDialog(null, "Enter valid Address "); 
+            return false;
+        } //-----------------------------------------
+        
+        else if (pno_tf.getText() != "")
+        {
+            //pattern p = Pattern.compile("^ [0-9][0-9][12]$");
+            //Matcher m 
+                //return true;
+        }
+        /*
+        else if ()
+        {
+                    
+        }
+        else if(!nic_tf.getText().matches("[0-9]"))
+        {
+            
+        }*/
+        else
+        {
+            try {
+                InternetAddress emailAdd = new InternetAddress(mail_tf.getText());
+                emailAdd.validate();
+                
+            } catch (AddressException ex) 
+            {
+                JOptionPane.showMessageDialog(null, "Enter valide email "); 
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public void dobCalc()
+    {
+        
+        String nic = nic_tf.getText();
+        String ID = String.valueOf(nic.charAt(0) + String.valueOf(nic.charAt(1)));
+        int Byear = Integer.valueOf(ID);
+        
+        if(Byear >50)
+        {
+            ID = "19"+ID;
+             
+        }
+        else
+        {
+            ID = "20"+ID;
+        }
+        
+         String dob = String.valueOf(nic.charAt(2))+ String.valueOf(nic.charAt(3))+ String.valueOf(nic.charAt(4));
+         int day = Integer.valueOf(dob);
+         
+        gen = "";
+         if(day >500)
+         {
+             gen = "Female";
+             day-= 500;
+         }
+         else
+         {
+             gen = "Male";
+         }
+         
+         int year = Integer.valueOf(ID);
+         if(0!=year %4)
+         {
+             if(day>59)
+             {
+                 day--;
+             }
+         }
+         
+         LocalDate d = Year.of(year). atDay(day);
+         DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
+            text = d.format(form);
+         //System.out.println("Date of birth : "+ text + "Gender : "+ gen);
+         
+    } 
+    
+    private void repo_bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repo_bActionPerformed
+        System.out.println(jTable1.getSelectedRow());
+        if(jTable1.getSelectedRow()==-1)
+        {
+            try {
+           // int row = jTable1.getSelectedRow();
+            JFrame re=new JFrame("Report");
+            Connection db=Database.getConnection();
+            Map par =new HashMap();
+            par.put(null,null);
+            JRViewer vi=null;
+             
+            JasperPrint p=JasperFillManager.fillReport("src\\Reports\\allCoustormer.jasper", par, db);
+             vi=new JRViewer(p);
+             vi.setVisible(true);
+             re.setSize(1000,700);
+             re.add(vi);
+             re.setVisible(true);
+             // System.out.println("a");
+            } 
+            catch (Exception e) 
+            {
+            e.printStackTrace();
+            }
+        }
+        else
+        {
+            try 
+            {
+                int row = jTable1.getSelectedRow();
+                JFrame re=new JFrame("Report");
+                 Connection db=Database.getConnection();
+                 Map par =new HashMap();
+                 par.put("nic",jTable1.getValueAt(row, 3).toString());
+                 JRViewer vi=null;
+             
+                 JasperPrint p=JasperFillManager.fillReport("src\\Reports\\select_cus.jasper", par, db);
+                    vi=new JRViewer(p);
+                 vi.setVisible(true);
+                 re.setSize(1000,700);
+                 re.add(vi);
+                 re.setVisible(true);
+                // System.out.println("a");
+            } 
+            catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        
+       
+    }//GEN-LAST:event_repo_bActionPerformed
+
+    private void search_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_tfKeyTyped
+       // tableSearchCustomerUseNic();
+    }//GEN-LAST:event_search_tfKeyTyped
+
+    private void search_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_cbActionPerformed
+
+    }//GEN-LAST:event_search_cbActionPerformed
+
+    private void addres_tfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addres_tfKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addres_tfKeyReleased
+
+    private void bar_tfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bar_tfKeyPressed
+     
+    }//GEN-LAST:event_bar_tfKeyPressed
+
+    private void bar_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bar_tfKeyTyped
+       
+    }//GEN-LAST:event_bar_tfKeyTyped
+
+    private void bar_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bar_tfActionPerformed
+       
+    }//GEN-LAST:event_bar_tfActionPerformed
+
+   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton add_b;
+    private javax.swing.JTextField addres_tf;
+    private javax.swing.JTextField bar_tf;
+    private javax.swing.JButton del_b;
+    private javax.swing.JComboBox<String> details_cb;
+    private javax.swing.JButton edit_b;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -230,10 +1152,14 @@ public class Customer extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField mail_tf;
+    private javax.swing.JTextField name_tf;
+    private javax.swing.JTextField nic_tf;
+    private javax.swing.JTextField pno_tf;
+    private javax.swing.JButton re_b;
+    private javax.swing.JLabel re_la;
+    private javax.swing.JButton repo_b;
+    private javax.swing.JComboBox<String> search_cb;
+    private javax.swing.JTextField search_tf;
     // End of variables declaration//GEN-END:variables
 }

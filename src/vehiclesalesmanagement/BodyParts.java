@@ -5,8 +5,11 @@
  */
 package vehiclesalesmanagement;
 
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,6 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class BodyParts extends javax.swing.JPanel {
 
+    
     /**
      * Creates new form BodyParts
      */
@@ -21,6 +25,16 @@ public class BodyParts extends javax.swing.JPanel {
         initComponents();
         brandload();
         loadType();
+        alloyWheelTableLoader();
+        multimediaTableLoader();
+        acceTableLoader();
+        typecombo();
+        tabaleVisibility();
+        
+        
+                
+               
+
     }
 
     /**
@@ -62,6 +76,9 @@ public class BodyParts extends javax.swing.JPanel {
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -73,11 +90,21 @@ public class BodyParts extends javax.swing.JPanel {
         jTextField10 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jToggleButton3 = new javax.swing.JToggleButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 204, 204), null));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,6 +178,8 @@ public class BodyParts extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Hertz (Hz)");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 100, 130, 37));
+
+        jTextField7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(633, 100, 150, 37));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -189,6 +218,18 @@ public class BodyParts extends javax.swing.JPanel {
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 98, 110, 37));
         jPanel1.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(633, 197, 150, 41));
 
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel23.setText("Description");
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 130, 20));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 250, 150, 70));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 791, 334));
+
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 204, 204), null));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -209,6 +250,11 @@ public class BodyParts extends javax.swing.JPanel {
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setText("Delete Part");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 60, 170, 42));
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/arrow-repeat-once.png"))); // NOI18N
@@ -216,55 +262,147 @@ public class BodyParts extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Update Part");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 113, 170, 48));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(99, 194, 200, 39));
-        jPanel2.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(99, 241, 200, 37));
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 200, 39));
+
+        jTextField10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField10KeyReleased(evt);
+            }
+        });
+        jPanel2.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 200, 37));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Brand");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 194, 65, 39));
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 230, 70, 39));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Model");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 239, 65, 37));
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 270, 70, 37));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel25.setText("Type");
+        jPanel2.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 60, 40));
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Type" }));
+        jComboBox4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox4MouseClicked(evt);
+            }
+        });
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 200, 40));
 
         jLabel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 300, 130));
+        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 300, 140));
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(799, 2, 337, 334));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Type", "Brand", "Model", "Colour", "Size", "Quantity", "Price", "Amphere", "Hertz", "Model No", "Rim Material"
+                "Brand", "Model No", "Colour", "Model", "Quantity", "Size", "Price", "Rim Material"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 791, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
-        );
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 371, 1120, 100));
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Brand", "Mode No", "Colour", "Model", "Quantity", "Amphere", "hrtz", "price(Rs)"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(jTable3);
+
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 508, 540, 160));
+
+        jToggleButton1.setBackground(new java.awt.Color(255, 255, 51));
+        jToggleButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jToggleButton1.setText("AlloyWheel");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+        add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 342, 129, -1));
+
+        jToggleButton2.setBackground(new java.awt.Color(153, 255, 51));
+        jToggleButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jToggleButton2.setText("Multimedia");
+        add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 131, -1));
+
+        jToggleButton3.setBackground(new java.awt.Color(255, 102, 102));
+        jToggleButton3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jToggleButton3.setText("Accessories");
+        add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 480, 127, -1));
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Brand", "Model No", "Colour", "Model", "Quantity", "Discription", "Price (Rs)"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable4MouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(jTable4);
+
+        add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 508, 570, 160));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         new BodyParts_brand().setVisible(true);
+        new BodyParts_brand().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -300,86 +438,676 @@ public class BodyParts extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       String bidNumber=null;
-      
-        
-        if(jComboBox1.getSelectedItem().equals("AlloyWheel")){
-        
-            
-              try {
-                Database.setData("insert into body_parts(brand,modeNum,colour,model,quantity) values('"+jComboBox2.getSelectedItem()+"','"+jTextField8.getText()+"','"+jTextField2.getText()+"','"+jComboBox3.getSelectedItem()+"','"+jTextField4.getText()+"')");
-                ResultSet bid_rs = Database.getData("select * from body_parts where modeNum='"+jTextField8.getText()+"'");
-                if(bid_rs.next()){
-                    bidNumber = bid_rs.getString(1); 
-                    
-                }else{
-                    JOptionPane.showMessageDialog(null, "no match found!");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            
-            try {
-                Database.setData("insert into alloywheel(bid,size,rimMaterial) values('"+bidNumber+"','"+jTextField3.getText()+"','"+jTextField9.getText()+"')");
-                JOptionPane.showMessageDialog(null, "AlloyWheel inserted successfull");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else if(jComboBox1.getSelectedItem().equals("Multimedia")){
-            jTextField7.setEnabled(false);
-            try {
-                Database.setData("insert into body_parts(brand,modeNum,colour,model,quantity) values('"+jComboBox2.getSelectedItem()+"','"+jTextField8.getText()+"','"+jTextField2.getText()+"','"+jComboBox3.getSelectedItem()+"','"+jTextField4.getText()+"')");
-                ResultSet bid_rs = Database.getData("select * from body_parts where modeNum='"+jTextField8.getText()+"'");
-                if(bid_rs.next()){
-                    bidNumber = bid_rs.getString(1); 
-                    
-                }else{
-                    JOptionPane.showMessageDialog(null, "no match found!");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            
-            try {
-                Database.setData("insert into multimedia(bid,amphere) values('"+bidNumber+"','"+jTextField6.getText()+"')");
-                JOptionPane.showMessageDialog(null, "Multimedia inserted successfull");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            
-            
-            
-                 // fuking awasome massa ..............................
-            
-            
-        
-        }else if(jComboBox1.getSelectedItem().equals("Accessories")){
-                 
+        String bidNumber = null;
+        String modNum = jTextField8.getText();
         
        
         
-        }else{
+
+        if (jComboBox1.getSelectedItem().equals("AlloyWheel")) {
+
+            try{
+                    
+                ResultSet modN_rs = Database.getData("select * from body_parts where modeNum = '"+modNum+"'");
+                        
+                if(modN_rs.next()){
+                    JOptionPane.showMessageDialog(null, "Allow Update Only! Item is exist!");
+                }else{
+                    
+                 Database.setData("insert into body_parts(brand,modeNum,colour,model,quantity,price) values('" + jComboBox2.getSelectedItem() + "','" + jTextField8.getText() + "','" + jTextField2.getText() + "','" + jComboBox3.getSelectedItem() + "','" + jTextField4.getText() + "','" + jTextField5.getText() + "')");
+                ResultSet bid_rs = Database.getData("select * from body_parts where modeNum='" + jTextField8.getText() + "'");
+                if (bid_rs.next()) {
+                    bidNumber = bid_rs.getString(1);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "no match found!");
+                }   
+                    
+                Database.setData("insert into alloywheel(bid,size,rimMaterial) values('" + bidNumber + "','" + jTextField3.getText() + "','" + jTextField9.getText() + "')");
+                JOptionPane.showMessageDialog(null, "AlloyWheel inserted successfull");    
+                    
+                    
+                    
+                    
+                    
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }  
+         
+        } else if (jComboBox1.getSelectedItem().equals("Multimedia")) {
+            jTextField7.setEnabled(false);
+            
+            
+            try {
+                 ResultSet modN_rs = Database.getData("select * from body_parts where modeNum = '"+modNum+"'");
+                        
+                if(modN_rs.next()){
+                    JOptionPane.showMessageDialog(null, "Allow Update Only! Item is exist!");
+                }else{
+                
+                Database.setData("insert into body_parts(brand,modeNum,colour,model,quantity,price) values('" + jComboBox2.getSelectedItem() + "','" + jTextField8.getText() + "','" + jTextField2.getText() + "','" + jComboBox3.getSelectedItem() + "','" + jTextField4.getText() + "','" + jTextField5.getText() + "')");
+                ResultSet bid_rs = Database.getData("select * from body_parts where modeNum='" + jTextField8.getText() + "'");
+                if (bid_rs.next()) {
+                    bidNumber = bid_rs.getString(1);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "no match found!");
+                }
+                
+                Database.setData("insert into multimedia(bid,amphere,hrtz) values('" + bidNumber + "','" + jTextField6.getText() + "','" + jTextField7.getText() + "')");
+                JOptionPane.showMessageDialog(null, "Multimedia inserted successfull");
+                
+                
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+
+        } else if (jComboBox1.getSelectedItem().equals("Accessories")) {
+
+            
+            try {
+                ResultSet modN_rs = Database.getData("select * from body_parts where modeNum = '"+modNum+"'");
+                        
+                if(modN_rs.next()){
+                    JOptionPane.showMessageDialog(null, "Allow Update Only! Item is exist!");
+                }else{
+                Database.setData("insert into body_parts(brand,modeNum,colour,model,quantity,price) values('" + jComboBox2.getSelectedItem() + "','" + jTextField8.getText() + "','" + jTextField2.getText() + "','" + jComboBox3.getSelectedItem() + "','" + jTextField4.getText() + "','" + jTextField5.getText() + "')");
+                ResultSet bid_rs = Database.getData("select * from body_parts where modeNum='" + jTextField8.getText() + "'");
+                if (bid_rs.next()) {
+                    bidNumber = bid_rs.getString(1);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "no match found!");
+                }
+                
+                Database.setData("insert into accessrices(bid,discript) values('" + bidNumber + "','" + jTextArea1.getText() + "')");
+                JOptionPane.showMessageDialog(null, "Aceessories inserted successfull");
+                
+                
+                }
+                
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+
+        } else {
             JOptionPane.showMessageDialog(null, "Select the Type");
         }
+
+        SetEmpty();
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
-            
+
     }//GEN-LAST:event_jComboBox1MouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-      
-        if(jComboBox1.getSelectedItem()=="AlloyWheel"){
-             jTextField6.setEnabled(false);
+
+        jComboBox2.removeAllItems();
+        try {
+            ResultSet rsb = Database.getData("select brandName from bodypartbrand where status='" + jComboBox1.getSelectedItem() + "'");
+            while (rsb.next()) {
+
+                jComboBox2.addItem(rsb.getString("brandName"));
+
+            }
+
+        } catch (Exception e) {
+        }
+
+        if (jComboBox1.getSelectedItem() == "AlloyWheel") {
+
+            jTextField6.setEnabled(false);
             jTextField7.setEnabled(false);
-        }else if(jComboBox1.getSelectedItem()=="Multimedia"){
+            jTextArea1.setEnabled(false);
+
+            jTextField6.setText("");
+            jTextField7.setText("");
+            jTextArea1.setText("");
+
+            jTextField3.setEnabled(true);
+            jTextField9.setEnabled(true);
+        } else if (jComboBox1.getSelectedItem() == "Multimedia") {
+
+            jTextField3.setEnabled(false);
+            jTextField9.setEnabled(false);
+            jTextArea1.setEnabled(false);
+
+            jTextField3.setText("");
+            jTextField9.setText("");
+            jTextArea1.setText("");
+
+            jTextField6.setEnabled(true);
+            jTextField7.setEnabled(true);
+
+        } else if (jComboBox1.getSelectedItem() == "Accessories") {
+
+            jTextField3.setEnabled(false);
+            jTextField9.setEnabled(false);
+            jTextField6.setEnabled(false);
+            jTextField7.setEnabled(false);
+            jTextArea1.setEnabled(true);
+
+            jTextField3.setText("");
+            jTextField9.setText("");
+            jTextField6.setText("");
+            jTextField7.setText("");
+
+        }
+
+
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        if (jComboBox4.getSelectedItem().equals("AlloyWheel")) {
+            
+            jTextField1.setEnabled(true);
+            jTextField10.setEnabled(true);
+            
+            
+
+            alloyWheelTableLoader();
+            multimediaTableLoader();
+            acceTableLoader();
+            jTable1.setEnabled(true);
+            jTable3.setEnabled(false);
+            jTable4.setEnabled(false);
+
+        } else if (jComboBox4.getSelectedItem().equals("Multimedia")) {
+            
+            jTextField1.setEnabled(true);
+            jTextField10.setEnabled(true);
+            
+            alloyWheelTableLoader();
+            multimediaTableLoader();
+            acceTableLoader();
+            jTable1.setEnabled(false);
+            jTable3.setEnabled(true);
+            jTable4.setEnabled(false);
+
+        } else if (jComboBox4.getSelectedItem().equals("Accessories")) {
+            jTextField1.setEnabled(true);
+            jTextField10.setEnabled(true);
+            alloyWheelTableLoader();
+            multimediaTableLoader();
+            acceTableLoader();
+            jTable1.setEnabled(false);
+            jTable3.setEnabled(false);
+            jTable4.setEnabled(true);
+            
+            
+
+        } else {
+            
+            if(jComboBox4.getSelectedItem()=="Select Type"){
+            jTextField1.setEnabled(false);
+            jTextField10.setEnabled(false);
+            }else{
+            jTextField1.setEnabled(true);
+            jTextField10.setEnabled(true);
         
-        }else if(jComboBox1.getSelectedItem()=="Accessories"){
+        }
+            alloyWheelTableLoader();
+            multimediaTableLoader();
+            acceTableLoader();
+
+            jTable1.setEnabled(true);
+            jTable3.setEnabled(true);
+            jTable4.setEnabled(true);
+        }
+
+    }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+
+        try {
+            multimediaTableLoader();
+        acceTableLoader();
+
+        jTextField6.setEnabled(false);
+        jTextField7.setEnabled(false);
+        jTextArea1.setEnabled(false);
+
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jTextArea1.setText("");
+
+        jTextField3.setEnabled(true);
+        jTextField9.setEnabled(true);
+
+        jLabel9.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        jTextField8.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+        jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
+        jLabel14.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+        jTextField3.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
+        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString());
+        jTextField9.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString());
+        jLabel8.setText("AlloyWheel");
         
+         multimediaTableLoader();
+        acceTableLoader();
+
+        jTextField6.setEnabled(false);
+        jTextField7.setEnabled(false);
+        jTextArea1.setEnabled(false);
+
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jTextArea1.setText("");
+
+        jTextField3.setEnabled(true);
+        jTextField9.setEnabled(true);
+
+        jLabel9.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        jTextField8.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
+        jTextField2.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
+        jLabel14.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+        jTextField4.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+        jTextField3.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
+        jTextField5.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString());
+        jTextField9.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString());
+        jLabel8.setText("AlloyWheel");
+        
+        
+            
+        } catch (ArrayIndexOutOfBoundsException e) {
+            
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "missing some details!");
+        }
+        
+       
+        
+       
+        
+        
+
+
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+
+        try {
+             alloyWheelTableLoader();
+
+        acceTableLoader();
+
+        jTextField3.setEnabled(false);
+        jTextField9.setEnabled(false);
+        jTextArea1.setEnabled(false);
+
+        jTextField3.setText("");
+        jTextField9.setText("");
+        jTextArea1.setText("");
+
+        jTextField6.setEnabled(true);
+        jTextField7.setEnabled(true);
+
+        jLabel8.setText("Multimedia");
+        jLabel9.setText(jTable3.getValueAt(jTable3.getSelectedRow(), 0).toString());
+        jTextField8.setText(jTable3.getValueAt(jTable3.getSelectedRow(), 1).toString());
+        jTextField2.setText(jTable3.getValueAt(jTable3.getSelectedRow(), 2).toString());
+        jLabel14.setText(jTable3.getValueAt(jTable3.getSelectedRow(), 3).toString());
+        jTextField4.setText(jTable3.getValueAt(jTable3.getSelectedRow(), 4).toString());
+        jTextField6.setText(jTable3.getValueAt(jTable3.getSelectedRow(), 5).toString());
+        jTextField7.setText(jTable3.getValueAt(jTable3.getSelectedRow(), 6).toString());
+        jTextField5.setText(jTable3.getValueAt(jTable3.getSelectedRow(), 7).toString());
+            
+        } catch (ArrayIndexOutOfBoundsException e) {
+            
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "missing some details!");
         }
         
         
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+
+       
+
+    }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+        try {
+            
+            alloyWheelTableLoader();
+        multimediaTableLoader();
+
+        jTextField3.setEnabled(false);
+        jTextField9.setEnabled(false);
+        jTextField6.setEnabled(false);
+        jTextField7.setEnabled(false);
+        jTextArea1.setEnabled(true);
+
+        jTextField3.setText("");
+        jTextField9.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+
+        jLabel8.setText("Accessories");
+        jLabel9.setText(jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString());
+        jTextField8.setText(jTable4.getValueAt(jTable4.getSelectedRow(), 1).toString());
+        jTextField2.setText(jTable4.getValueAt(jTable4.getSelectedRow(), 2).toString());
+        jLabel14.setText(jTable4.getValueAt(jTable4.getSelectedRow(), 3).toString());
+        jTextField4.setText(jTable4.getValueAt(jTable4.getSelectedRow(), 4).toString());
+        jTextArea1.setText(jTable4.getValueAt(jTable4.getSelectedRow(), 5).toString());
+        jTextField5.setText(jTable4.getValueAt(jTable4.getSelectedRow(), 6).toString());
+            
+        } catch (ArrayIndexOutOfBoundsException e) {
+            
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "missing some details!");
+        }
+        
+        
+        
+    }//GEN-LAST:event_jTable4MouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String type = null;
+        String modelNo = null;
+        int bid = 0;
+        if (jTextField8.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "please select row of table!");
+        } else {
+            try {
+                type = jLabel8.getText();
+                modelNo = jTextField8.getText();
+                ResultSet a_rs = Database.getData("select bid from body_parts where modeNum ='" + modelNo + "'");
+                if (a_rs.next()) {
+                    bid = a_rs.getInt(1);
+                }
+
+                if (type.equalsIgnoreCase("AlloyWheel")) {
+
+                    Database.setData("insert into remove_bodyparts(brand,modeNum,model,status,price,size,rimMaterial,discript,amphere,hrtz) values ('" + jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString() + "','" + jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString() + "','" + jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString() + "','AlloyWheel','" + jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString() + "','" + jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString() + "','" + jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString() + "','null','null','null')");
+
+                    Database.setData("delete from alloywheel where bid='" + bid + "'");
+                    Database.setData("delete from body_parts where bid='" + bid + "'");
+                    JOptionPane.showMessageDialog(null, "body part is deleted");
+                } else if (type.equalsIgnoreCase("Accessories")) {
+                    Database.setData("insert into remove_bodyparts(brand,modeNum,model,status,price,size,rimMaterial,discript,amphere,hrtz) values ('" + jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString() + "','" + jTable4.getValueAt(jTable4.getSelectedRow(), 1).toString() + "','" + jTable4.getValueAt(jTable4.getSelectedRow(), 3).toString() + "','Accessories','" + jTable4.getValueAt(jTable4.getSelectedRow(), 6).toString() + "','null','null','" + jTable4.getValueAt(jTable4.getSelectedRow(), 1).toString() + "','null','null')");
+
+                    Database.setData("delete from accessrices where bid='" + bid + "'");
+                    Database.setData("delete from body_parts where bid='" + bid + "'");
+                    JOptionPane.showMessageDialog(null, "accessrices is deleted");
+                } else if (type.equalsIgnoreCase("Multimedia")) {
+                    Database.setData("insert into remove_bodyparts(brand,modeNum,model,status,price,size,rimMaterial,discript,amphere,hrtz) values ('" + jTable3.getValueAt(jTable3.getSelectedRow(), 0).toString() + "','" + jTable3.getValueAt(jTable3.getSelectedRow(), 1).toString() + "','" + jTable3.getValueAt(jTable3.getSelectedRow(), 3).toString() + "','Multimedia','" + jTable3.getValueAt(jTable3.getSelectedRow(), 7).toString() + "','null','null','null','" + jTable3.getValueAt(jTable3.getSelectedRow(), 5).toString() + "','" + jTable3.getValueAt(jTable3.getSelectedRow(), 6).toString() + "')");
+
+                    Database.setData("delete from multimedia where bid='" + bid + "'");
+                    Database.setData("delete from body_parts where bid='" + bid + "'");
+                    JOptionPane.showMessageDialog(null, "multimedia is deleted");
+                } else {
+                    JOptionPane.showMessageDialog(null, "please select row of table!");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String aBid = null;
+        if (jComboBox2.getSelectedItem().equals("Select Brand")) {
+            JOptionPane.showMessageDialog(null, "pleace select the brand!");
+        } else if (jComboBox2.getSelectedItem().equals("Select Mode")) {
+            JOptionPane.showMessageDialog(null, "pleace select the model!");
+        } else if (jComboBox1.getSelectedItem().equals("AlloyWheel")) {
+
+            try {
+
+                ResultSet bid_rs = Database.getData("select * from body_parts where modeNum='" + jTextField8.getText() + "'");
+                if (bid_rs.next()) {
+                    aBid = bid_rs.getString(1);
+
+                    Database.setData("update body_parts set brand='" + jComboBox2.getSelectedItem() + "',modeNum='" + jTextField8.getText() + "',colour='" + jTextField2.getText() + "',model='" + jComboBox3.getSelectedItem() + "',quantity='" + jTextField4.getText() + "',price='" + jTextField5.getText() + "' where bid='" + aBid + "'");
+                    Database.setData("update alloywheel set size='" + jTextField3.getText() + "',rimMaterial='" + jTextField9.getText() + "' where bid='" + aBid + "'");
+                    JOptionPane.showMessageDialog(null, "update is succeed");
+                } else {
+                    JOptionPane.showMessageDialog(null, "no match found!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else if (jComboBox1.getSelectedItem().equals("Multimedia")) {
+
+            try {
+                ResultSet bid_rs = Database.getData("select * from body_parts where modeNum='" + jTextField8.getText() + "'");
+                if (bid_rs.next()) {
+                    aBid = bid_rs.getString(1);
+
+                    Database.setData("update body_parts set brand='" + jComboBox2.getSelectedItem() + "',modeNum='" + jTextField8.getText() + "',colour='" + jTextField2.getText() + "',model='" + jComboBox3.getSelectedItem() + "',quantity='" + jTextField4.getText() + "',price='" + jTextField5.getText() + "' where bid='" + aBid + "'");
+                    Database.setData("update multimedia set amphere='" + jTextField6.getText() + "',hrtz='" + jTextField7.getText() + "' where bid='" + aBid + "'");
+                    JOptionPane.showMessageDialog(null, "update is succeed");
+                } else {
+                    JOptionPane.showMessageDialog(null, "no match found!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (jComboBox1.getSelectedItem().equals("Accessories")) {
+            try {
+                ResultSet bid_rs = Database.getData("select * from body_parts where modeNum='" + jTextField8.getText() + "'");
+                if (bid_rs.next()) {
+                    aBid = bid_rs.getString(1);
+
+                    Database.setData("update body_parts set brand='" + jComboBox2.getSelectedItem() + "',modeNum='" + jTextField8.getText() + "',colour='" + jTextField2.getText() + "',model='" + jComboBox3.getSelectedItem() + "',quantity='" + jTextField4.getText() + "',price='" + jTextField5.getText() + "' where bid='" + aBid + "'");
+                    Database.setData("update accessrices set discript='" + jTextArea1.getText() + "' where bid='" + aBid + "'");
+                    JOptionPane.showMessageDialog(null, "update is succeed");
+                } else {
+                    JOptionPane.showMessageDialog(null, "no match found!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "please select the type!");
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox4MouseClicked
+        
+        
+    }//GEN-LAST:event_jComboBox4MouseClicked
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+       
+        if (jComboBox4.getSelectedItem().equals("AlloyWheel")) {
+            
+           DefaultTableModel dtm_b = (DefaultTableModel)  jTable1.getModel();
+           dtm_b.setRowCount(0);
+           try {
+           
+            ResultSet a_rs = Database.getData("select * from body_parts b,alloywheel a where brand like '"+jTextField1.getText()+"%"+"' and a.bid = b.bid");
+            while (a_rs.next()) {
+
+                Vector va = new Vector();
+                va.add(a_rs.getString(2));
+                va.add(a_rs.getString(3));
+                va.add(a_rs.getString(4));
+                va.add(a_rs.getString(5));
+                va.add(a_rs.getString(6));
+                va.add(a_rs.getString(10));
+                va.add(a_rs.getString(7));
+                va.add(a_rs.getString(11));
+                
+                dtm_b.addRow(va);
+            }
+                
+            } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+            }else if(jComboBox4.getSelectedItem().equals("Multimedia")) {
+            
+                DefaultTableModel dtm_m = (DefaultTableModel)  jTable3.getModel();
+           dtm_m.setRowCount(0);
+           try {
+           
+            ResultSet m_rs = Database.getData("select * from body_parts b,multimedia m where brand like '"+jTextField1.getText()+"%"+"' and m.bid = b.bid");
+            while (m_rs.next()) {
+
+                Vector vm = new Vector();
+                vm.add(m_rs.getString(2));
+                vm.add(m_rs.getString(3));
+                vm.add(m_rs.getString(4));
+                vm.add(m_rs.getString(5));
+                vm.add(m_rs.getString(6));
+                vm.add(m_rs.getString(10));
+                vm.add(m_rs.getString(11));
+                vm.add(m_rs.getString(7));
+                
+                dtm_m.addRow(vm);
+            }
+                
+            } catch (Exception e) {
+            e.printStackTrace();
+        }
+           
+
+        } else if(jComboBox4.getSelectedItem().equals("Accessories")) {
+        
+             DefaultTableModel dtm_as = (DefaultTableModel)  jTable4.getModel();
+           dtm_as.setRowCount(0);
+           try {
+           
+            ResultSet ass_rs = Database.getData("select * from body_parts b,accessrices a where brand like '"+jTextField1.getText()+"%"+"' and a.bid = b.bid");
+            while (ass_rs.next()) {
+
+                Vector vass = new Vector();
+                vass.add(ass_rs.getString(2));
+                vass.add(ass_rs.getString(3));
+                vass.add(ass_rs.getString(4));
+                vass.add(ass_rs.getString(5));
+                vass.add(ass_rs.getString(6));
+                vass.add(ass_rs.getString(10));
+                vass.add(ass_rs.getString(7));
+                
+                
+                dtm_as.addRow(vass);
+            }
+                
+            } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        }
+                    
+             
+
+        
+           
+           
+            
+            
+
+           
+
+        
+           
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jTextField10KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField10KeyReleased
+       
+        
+        if (jComboBox4.getSelectedItem().equals("AlloyWheel")) {
+            
+           DefaultTableModel dtm_b = (DefaultTableModel)  jTable1.getModel();
+           dtm_b.setRowCount(0);
+           try {
+           
+            ResultSet a_rs = Database.getData("select * from body_parts b,alloywheel a where model like '"+jTextField10.getText()+"%"+"' and a.bid = b.bid");
+            while (a_rs.next()) {
+
+                Vector va = new Vector();
+                va.add(a_rs.getString(2));
+                va.add(a_rs.getString(3));
+                va.add(a_rs.getString(4));
+                va.add(a_rs.getString(5));
+                va.add(a_rs.getString(6));
+                va.add(a_rs.getString(10));
+                va.add(a_rs.getString(7));
+                va.add(a_rs.getString(11));
+                
+                dtm_b.addRow(va);
+            }
+                
+            } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+            }else if(jComboBox4.getSelectedItem().equals("Multimedia")) {
+            
+                DefaultTableModel dtm_m = (DefaultTableModel)  jTable3.getModel();
+           dtm_m.setRowCount(0);
+           try {
+           
+            ResultSet m_rs = Database.getData("select * from body_parts b,multimedia m where model like '"+jTextField10.getText()+"%"+"' and m.bid = b.bid");
+            while (m_rs.next()) {
+
+                Vector vm = new Vector();
+                vm.add(m_rs.getString(2));
+                vm.add(m_rs.getString(3));
+                vm.add(m_rs.getString(4));
+                vm.add(m_rs.getString(5));
+                vm.add(m_rs.getString(6));
+                vm.add(m_rs.getString(10));
+                vm.add(m_rs.getString(11));
+                vm.add(m_rs.getString(7));
+                
+                dtm_m.addRow(vm);
+            }
+                
+            } catch (Exception e) {
+            e.printStackTrace();
+        }
+           
+
+        } else if(jComboBox4.getSelectedItem().equals("Accessories")) {
+        
+             DefaultTableModel dtm_as = (DefaultTableModel)  jTable4.getModel();
+           dtm_as.setRowCount(0);
+           try {
+           
+            ResultSet ass_rs = Database.getData("select * from body_parts b,accessrices a where model like '"+jTextField10.getText()+"%"+"' and a.bid = b.bid");
+            while (ass_rs.next()) {
+
+                Vector vass = new Vector();
+                vass.add(ass_rs.getString(2));
+                vass.add(ass_rs.getString(3));
+                vass.add(ass_rs.getString(4));
+                vass.add(ass_rs.getString(5));
+                vass.add(ass_rs.getString(6));
+                vass.add(ass_rs.getString(10));
+                vass.add(ass_rs.getString(7));
+                
+                
+                dtm_as.addRow(vass);
+            }
+                
+            } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        }
+    }//GEN-LAST:event_jTextField10KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -391,6 +1119,7 @@ public class BodyParts extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -406,6 +1135,8 @@ public class BodyParts extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -416,7 +1147,13 @@ public class BodyParts extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
@@ -427,11 +1164,14 @@ public class BodyParts extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
     // End of variables declaration//GEN-END:variables
 
     private void brandload() {
-       
-         try {
+
+        try {
             ResultSet rs = Database.getData("select brandName from bodypartbrand");
             while (rs.next()) {
                 jComboBox2.addItem(rs.getString("brandName"));
@@ -444,9 +1184,135 @@ public class BodyParts extends javax.swing.JPanel {
     }
 
     private void loadType() {
-       jComboBox1.addItem("AlloyWheel");
+        jComboBox1.addItem("AlloyWheel");
         jComboBox1.addItem("Multimedia");
-         jComboBox1.addItem("Accessories");
-       
+        jComboBox1.addItem("Accessories");
+
+    }
+
+    private void SetEmpty() {
+
+        jTextField6.setText(null);
+        jTextField7.setText(null);
+        jTextArea1.setText(null);
+        jTextField3.setText(null);
+        jTextField9.setText(null);
+        jTextArea1.setText(null);
+        jTextField3.setText(null);
+        jTextField9.setText(null);
+        jTextField6.setText(null);
+        jTextField7.setText(null);
+        jTextField2.setText(null);
+        jTextField4.setText(null);
+        jTextField8.setText(null);
+        jTextField5.setText(null);
+
+    }
+
+    private void autoTableLoader() {
+
+    }
+
+    private void alloyWheelTableLoader() {
+
+        DefaultTableModel alloy_dtm = (DefaultTableModel) jTable1.getModel();
+        alloy_dtm.setRowCount(0);
+
+        try {
+            ResultSet alloy_rs = Database.getData("select * from body_parts b, alloywheel a where b.bid = a.bid ");
+
+            while (alloy_rs.next()) {
+                Vector al_v = new Vector();
+
+                al_v.add(alloy_rs.getString(2));
+                al_v.add(alloy_rs.getString(3));
+                al_v.add(alloy_rs.getString(4));
+                al_v.add(alloy_rs.getString(5));
+                al_v.add(alloy_rs.getString(6));
+                al_v.add(alloy_rs.getString(10));
+                al_v.add(alloy_rs.getString(7));
+                al_v.add(alloy_rs.getString(11));
+
+                alloy_dtm.addRow(al_v);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void multimediaTableLoader() {
+        DefaultTableModel multi_dtm = (DefaultTableModel) jTable3.getModel();
+        multi_dtm.setRowCount(0);
+
+        try {
+            ResultSet multi_rs = Database.getData("select * from body_parts b, multimedia a where b.bid = a.bid ");
+
+            while (multi_rs.next()) {
+                Vector al_v = new Vector();
+
+                al_v.add(multi_rs.getString(2));
+                al_v.add(multi_rs.getString(3));
+                al_v.add(multi_rs.getString(4));
+                al_v.add(multi_rs.getString(5));
+                al_v.add(multi_rs.getString(6));
+                al_v.add(multi_rs.getString(10));
+                al_v.add(multi_rs.getString(11));
+                al_v.add(multi_rs.getString(7));
+
+                multi_dtm.addRow(al_v);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void acceTableLoader() {
+        DefaultTableModel acc_dtm = (DefaultTableModel) jTable4.getModel();
+        acc_dtm.setRowCount(0);
+
+        try {
+            ResultSet acc_rs = Database.getData("select * from body_parts b, accessrices a where b.bid = a.bid ");
+
+            while (acc_rs.next()) {
+                Vector al_v = new Vector();
+
+                al_v.add(acc_rs.getString(2));
+                al_v.add(acc_rs.getString(3));
+                al_v.add(acc_rs.getString(4));
+                al_v.add(acc_rs.getString(5));
+                al_v.add(acc_rs.getString(6));
+                al_v.add(acc_rs.getString(10));
+                al_v.add(acc_rs.getString(7));
+
+                acc_dtm.addRow(al_v);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void typecombo() {
+
+        jComboBox4.addItem("AlloyWheel");
+        jComboBox4.addItem("Multimedia");
+        jComboBox4.addItem("Accessories");
+        
+        if(jComboBox4.getSelectedItem()=="Select Type"){
+            jTextField1.setEnabled(false);
+            jTextField10.setEnabled(false);
+        }
+
+    }
+
+    private void tabaleVisibility() {
+        jTable1.setEnabled(true);
+        jTable3.setEnabled(true);
+        jTable4.setEnabled(true);
     }
 }
